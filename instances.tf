@@ -1,6 +1,6 @@
 # All AMIs are Ubuntu
 resource "aws_instance" "sgw1" {
-    ami = var.amis.us-west-2-amd64-2004
+    ami = var.us-west-2-amd64-2004
     instance_type = "t3a.micro"
     user_date = file("cloud-init/base.yml")
     subnet_id = aws_subnet.sgw-sub-a.id
@@ -15,7 +15,7 @@ resource "aws_instance" "sgw1" {
 }
 
 resource "aws_instance" "lxd-1" {
-    ami = var.amis.us-west-2-amd64-2004
+    ami = var.us-west-2-amd64-2004
     instance_type = "t3a.small"
     subnet_id = aws_subnet.lxd-sub-a.id
     vpc_security_group_ids = [ aws_security_group.lxd.id ]

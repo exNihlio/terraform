@@ -18,9 +18,9 @@ variable "lxd-sub-c-cidr" {
     default = "10.0.3.0/28"
 }
 
-variable "amis" {
-    # us-west-2 amd64 ubuntu 20.04
+variable "us-west-a-amd64-2004" {
     default = "ami-0bf357e4bc8a8b9e3"
-    us-west-2-amd64-2004 = "ami-0bf357e4bc8a8b9e3"
-    us-west-2-arm64-2004 = "ami-0c336ce0fc42f4e97"
+}
+variable "us-west-2a-arm64-2004" {
+    default = "ami-0c336ce0fc42f4e97"
 }
