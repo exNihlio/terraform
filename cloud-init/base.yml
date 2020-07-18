@@ -1,0 +1,12 @@
+#cloud-config
+users:
+  - name: abeamer
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILkFZyn38amsLO4q8H6igxZJEX2i0xDXXpsagGNVv3b3 abeamer@3c22fb21db2d.ant.amazon.com
+package_update: true
+packages:
+  - vim
+  - git
+  - ansible
