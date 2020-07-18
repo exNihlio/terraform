@@ -4,7 +4,7 @@ resource "aws_instance" "sgw1" {
     instance_type = "t3a.micro"
     user_data = file("cloud-init/base.yml")
     subnet_id = aws_subnet.sgw-sub-a.id
-    associate_public_ip = True
+    associate_public_ip_address = True
     vpc_security_group_ids = [ aws_security_group.sgw.id ]
     availability_zone = "us-west-2a"
     tags = {
