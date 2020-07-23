@@ -6,9 +6,10 @@ resource "aws_dynamodb_table" "dynamodb-table" {
   hash_key       = var.hash_key
   range_key      = var.range_key
   # Iterate through DynamoDB attributes variable
-  for attr in var.dynamodb_attributes:
-  attribute {
-    name = attr.name
-    type = attr.type
-  }
+  dynamic "attribute" {
+    for_each = [ for a in var.attributes ]:
+    content {
+        name = a.name
+        type = a.type
+    }
 }
