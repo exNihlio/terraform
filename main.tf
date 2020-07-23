@@ -9,3 +9,7 @@ terraform {
     region = "us-west-2"
   }
 }
+
+module "dynamdb_table_one" {
+    source = "./modules/dynamodb"
+}
