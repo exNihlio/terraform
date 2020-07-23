@@ -12,4 +12,23 @@ terraform {
 
 module "dynamdb_table_one" {
     source = "./modules/dynamodb"
+    variable "dynamodb_table_name" {
+        default = "people"
+    }
+    variable "rcu" {
+        default = "20"
+    }
+    variable "wcu" {
+        default = "20"
+    }
+    variable "hash_key" {
+        default = "name"
+    }
+    variable "range_key" {
+        default = "age"
+    }
+    variable "dynamodb_attributes" {
+        default = [ "attribute { name = 'name' type = 'String'",
+                    "attribute { name = 'age' type =  'Integer'"]
+    }
 }
