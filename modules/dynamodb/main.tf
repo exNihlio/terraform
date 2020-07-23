@@ -7,5 +7,8 @@ resource "aws_dynamodb_table" "dynamodb-table" {
   range_key      = var.range_key
   # Iterate through DynamoDB attributes variable
   for attr in var.dynamodb_attributes:
-    attr
+    attribute {
+        name = attr.name
+        type = attr.type
+    }
 }
