@@ -27,8 +27,15 @@ module "dynamdb_table_one" {
     variable "range_key" {
         default = "age"
     }
+    # HCL array of dicts
     variable "dynamodb_attributes" {
-        default = [ "attribute { name = 'name' type = 'String'",
-                    "attribute { name = 'age' type =  'Integer'"]
+        type = list(object({
+            name = string
+            type = string
+            }))
+        default = [ {name = "name",
+                     type = "String"},
+                    {name = "age",
+                     type = "Integer"} ]
     }
 }
