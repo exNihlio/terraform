@@ -15,27 +15,9 @@ module "dynamdb_table_one" {
     variable "dynamodb_table_name" {
         default = "people"
     }
-    variable "rcu" {
-        default = "20"
-    }
-    variable "wcu" {
-        default = "20"
-    }
-    variable "hash_key" {
-        default = "name"
-    }
-    variable "range_key" {
-        default = "age"
-    }
-    # HCL array of dicts
-    variable "dynamodb_attributes" {
-        type = list(object({
-            name = string
-            type = string
-            }))
-        default = [ {name = "name",
-                     type = "String"},
-                    {name = "age",
-                     type = "Integer"} ]
-    }
+    rcu = var.rcu
+    wcu = var.wcu
+    range_key = var.range_key
+    hash_Key = var.hash_key
+    dynamodb_attributes = var.dynamodb_attributes
 }
