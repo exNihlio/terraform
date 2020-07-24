@@ -17,5 +17,5 @@ module "dynamdb_table_one" {
     write_capacity = var.write_capacity
     range_key = var.range_key
     hash_key = var.hash_key
-    attribtues = var.attributes
+    attributes = var.attributes
 }
