@@ -1,4 +1,4 @@
-variable "attribtues" {
+variable "attributes" {
     default = []
 }
 
