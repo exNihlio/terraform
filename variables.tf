@@ -17,7 +17,7 @@ variable "attributes" {
     #            type = string
     #            }))
     default = [ {name = "name",
-                 type = "String"},
+                 type = "S"},
                  {name = "age",
-                  type = "Integer"} ]
+                  type = "N"} ]
 }
