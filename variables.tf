@@ -12,10 +12,10 @@ variable "range_key" {
 }
 # HCL array of dicts
 variable "attributes" {
-    type = list(object({
-                name = string
-                type = string
-                }))
+    #type = list(object({
+    #            name = string
+    #            type = string
+    #            }))
     default = [ {name = "name",
                  type = "String"},
                  {name = "age",
