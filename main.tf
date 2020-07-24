@@ -16,5 +16,5 @@ module "dynamdb_table_one" {
     read_capacity = var.rcu
     write_capacity = var.wcu
     range_key = var.range_key
-    hash_Key = var.hash_key
+    hash_key = var.hash_key
 }
