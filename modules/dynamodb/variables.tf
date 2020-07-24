@@ -1,4 +1,4 @@
-variable "dynamodb_attribtues" {
+variable "attribtues" {
     default = []
 }
 

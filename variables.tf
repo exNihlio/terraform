@@ -1,7 +1,7 @@
-variable "rcu" {
+variable "read_capacity" {
     default = "20"
 }
-variable "wcu" {
+variable "write_capacity" {
     default = "20"
 }
 variable "hash_key" {
@@ -11,7 +11,7 @@ variable "range_key" {
     default = "age"
 }
 # HCL array of dicts
-variable "dynamodb_attributes" {
+variable "attributes" {
     type = list(object({
                 name = string
                 type = string
