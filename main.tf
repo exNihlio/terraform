@@ -10,6 +10,12 @@ terraform {
   }
 }
 
+# This is a specific invocation of the module.
+# Treat a module as a function and the invocation of the module below
+# as a function call
+# With the exception of the 'source' name, all of the keys below are
+# variables. These are fed into the module
+# variables.tf -> main.tf -> module/dynamodb/variables.tf -> module/dynamodb/main.tf
 module "dynamdb_table_one" {
     source = "./modules/dynamodb"
     name = "people"
