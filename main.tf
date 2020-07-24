@@ -12,12 +12,9 @@ terraform {
 
 module "dynamdb_table_one" {
     source = "./modules/dynamodb"
-    variable "dynamodb_table_name" {
-        default = "people"
-    }
-    rcu = var.rcu
-    wcu = var.wcu
+    name = var.dynamodb_table_name
+    read_capacity = var.rcu
+    write_capacity = var.wcu
     range_key = var.range_key
     hash_Key = var.hash_key
-    dynamodb_attributes = var.dynamodb_attributes
 }
