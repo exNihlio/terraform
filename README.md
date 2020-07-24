@@ -1,6 +1,6 @@
 ## What is this?
 
-Terraform code, for building projects in AWS.
+Terraform code, for building projects; mostly in AWS.
 
 ## What is it for?
 
@@ -12,12 +12,12 @@ Anyone who wants to. I make no promises for its capabilities. Use at your own ri
 
 ## Usage
 
-The LXD branch was written to provision systems in AWS for testing and running LXD. 
-I have since merged this back in master. Things will be a bit backwards here.
-Master is the workspace for new code, and then once that code is complete, it will
-be checked out into a separate branch. Future development of that code will take place
-in that branch.
+Mostly these are examples. I am not Gruntworks and this repo doesn't pretend
+to be examples of best practices. That being said, a focus is made on readabilty
+and clarity. Comments are made where appropriate and functionality is broken up
+and decoupled. Not everything needs to live in main.tf!
 
-This is because there will be Terraform code for a LOT of projects here, and they can't
-all live in the same space. So, if you want to learn how to provision EC2 instances, 
-check out the EC2 branch, when it exists.
+## Disclaimer
+
+This work and my opinions are my own and do not necessarily reflect the opinions of
+my employer; past or present.
