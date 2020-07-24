@@ -13,7 +13,7 @@ terraform {
 module "dynamdb_table_one" {
     source = "./modules/dynamodb"
     name = "people"
-    read_capacity = var.read_capcity
+    read_capacity = var.read_capacity
     write_capacity = var.write_capacity
     range_key = var.range_key
     hash_key = var.hash_key
