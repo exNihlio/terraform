@@ -1,3 +1,3 @@
-variable "attribtues" {
-    default = var.dyanmodb_attributes
+variable "dynamodb_attribtues" {
+    default = []
 }
