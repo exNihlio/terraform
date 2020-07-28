@@ -16,7 +16,7 @@ resource "aws_subnet" "pub_sub_1" {
     # Furthermore, dependency management will ensure that the VPC is created first
     # and then the subnets. Terraform has excellent automatic dependency management
     # but it also supports manual dependency management.
-    vpc_id = aws_vpc.terrafom-example.id
+    vpc_id = aws_vpc.terraform-example-vpc.id
     # Subnets are constrained to availability zones. It is a good practice to duplicate your
     # subnets and hence, your services across availability zones
     availability_zone = "us-west-2a"
@@ -26,6 +26,6 @@ resource "aws_subnet" "pub_sub_1" {
 # to an internet gateway. 
 resource "aws_subnet" "priv_sub_1" {
     cidr_block = "10.72.2.0/24"
-    vpc_id = aws_vpc.terrafomr-example.id
+    vpc_id = aws_vpc.terraform-example-vpc.id
     availability_zone = "us-west-2a"
 }
