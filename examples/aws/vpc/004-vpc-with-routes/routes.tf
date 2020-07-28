@@ -6,8 +6,8 @@
 # However, with internet gateways, nat gateways, VPC peering,
 # and VPNs, there are a myriad of destinations for network traffic
 # and AWS makes no assumptions on how that traffic is routed
-resource "aws_route" "igw" {
-    vpc_id = aws_vpc.terraform-example.id
+resource "aws_route_table" "igw" {
+    vpc_id = aws_vpc.terraform-example-vpc.id
     # The route block containers two parts, 'cidr_block' which is
     # the destination of the route. And the gateway_id, which is the
     # default gateway for the traffic.
