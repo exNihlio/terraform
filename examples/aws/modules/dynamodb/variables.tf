@@ -16,9 +16,5 @@ variable "attributes" {
     default = [ {name = "name",
                  type = "S"},
                 {name = "age",
-                 type = "N"},
-                {name = "hobbies",
-                 type = "S"},
-                {name = "friends"
-                 type = "S" } ]
+                 type = "N"}]
 }
