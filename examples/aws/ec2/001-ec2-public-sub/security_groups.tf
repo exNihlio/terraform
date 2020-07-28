@@ -3,12 +3,12 @@
 # NACLs which are assigned to subnets
 # As security groups are stateful, return connections are 
 # automatically allowed.
-resource "aws_security_grou" "ssh-only" {
+resource "aws_security_group" "ssh-only" {
     # The name of the security group
     name = "ssh-sg"
     # A friendly description of the SG
     description = "Allow SSH into instances"
-    The VPC that his subnet will belong to.
+    # The VPC that his subnet will belong to.
     vpc_id = aws_vpc.terraform-example-vpc.id
     # By default, security groups operate in a deny-all mode.
     # At the end of every security group rule collection is
@@ -22,14 +22,14 @@ resource "aws_security_grou" "ssh-only" {
         protocol = "tcp"
         # Multiple cidr blocks can be included. You can also specify a security group
         # id as the source.
-        cidr_block = [ "0.0.0.0/0" ]
+        cidr_blocks = [ "0.0.0.0/0" ]
     }
     egress {
         from_port = 0
         to_port = 0
         # To allow all protocols: TCP/UDP/ICMP etc, use "-1"
         protocol = "-1"
-        cidr_block = [ "0.0.0.0/0" ]
+        cidr_blocks = [ "0.0.0.0/0" ]
 
     }
 }

@@ -1,4 +1,4 @@
-resource "aws_vpc" "terraform-example" {
+resource "aws_vpc" "terraform-example-vpc" {
     # cidr_block is the only required argument for the VPC resource
     cidr_block = "10.72.0.0/16"
     # Virtually every AWS provider resource supports the tag block.

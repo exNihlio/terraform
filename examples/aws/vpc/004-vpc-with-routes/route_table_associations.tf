@@ -4,5 +4,5 @@
 # giving this subnet public internet access. 
 resource "aws_route_table_association" "sub_1" {
     subnet_id = aws_subnet.pub_sub_1.id
-    route_table_id = aws_route.igw.id
+    route_table_id = aws_route_table.igw.id
 }

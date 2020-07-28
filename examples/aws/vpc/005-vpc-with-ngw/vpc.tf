@@ -1,6 +1,6 @@
-resource "aws_vpc" "terraform-example" {
+resource "aws_vpc" "terraform-example-vpc" {
     cidr_block = "10.72.0.0/16"
-    tag = {
+    tags = {
         Name =  "terraform-example-vpc"
     }
 }
