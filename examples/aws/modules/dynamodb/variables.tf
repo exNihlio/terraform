@@ -12,13 +12,13 @@ variable "range_key" {
 }
 # HCL array of dicts
 variable "attributes" {
-    type = list(object({
-                name = string
-                type = string
-                }))
     # The 'type' must be either [ 'B', 'S', 'N' ]. This is ALL that will be accepted
     default = [ {name = "name",
                  type = "S"},
-                 {name = "age",
-                  type = "N"} ]
+                {name = "age",
+                 type = "N"},
+                {name = "hobbies",
+                 type = "S"},
+                {name = "friends"
+                 type = "S" } ]
 }
