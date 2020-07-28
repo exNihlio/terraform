@@ -23,7 +23,7 @@ resource "aws_instance" "test-instance-1" {
     user_data = file("cloud-init/base.yml")
     subnet_id = aws_subnet.pub-sub-1.id
     associate_public_ip_address = "true"
-    vpc_security_group_ids = [ aws_security_group.ssh-sg.id ]
+    vpc_security_group_ids = [ aws_security_group.ssh-only.id ]
     availability_zone = "us-west-2a"
     tags = {
         Name = "test-instance-1"
