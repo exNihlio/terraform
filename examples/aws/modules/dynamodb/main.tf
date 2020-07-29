@@ -25,5 +25,5 @@ module "dynamdb_table_one" {
     hash_key = var.hash_key
     attributes = var.attributes
     # Read in data here
-    table_item = jsondecod(file("data/data.json"))
+    table_item = jsondecode(file("data/data.json"))
 }
