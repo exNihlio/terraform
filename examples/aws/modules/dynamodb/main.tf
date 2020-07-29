@@ -24,6 +24,4 @@ module "dynamdb_table_one" {
     range_key = var.range_key
     hash_key = var.hash_key
     attributes = var.attributes
-    # Read in data here
-    table_item = file("data/data.json")
 }

@@ -21,7 +21,3 @@ variable "hash_key" {
 variable "table_name" {
     default = []
 }
-
-variable "table_item" {
-    default = []
-}

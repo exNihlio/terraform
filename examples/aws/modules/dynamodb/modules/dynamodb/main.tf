@@ -23,9 +23,3 @@ resource "aws_dynamodb_table" "dynamodb-table" {
         }
     }
 }
-
-resource "aws_dynamodb_table_item" "dynamodb-item" {
-    table_name = var.table_name
-    hash_key = var.hash_key
-    item = var.table_item
-}
