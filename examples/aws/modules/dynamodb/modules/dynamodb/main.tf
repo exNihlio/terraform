@@ -1,5 +1,5 @@
 resource "aws_dynamodb_table" "dynamodb-table" {
-    name           = var.name
+    name           = var.table_name
     billing_mode   = "PROVISIONED"
     read_capacity  = var.read_capacity
     write_capacity = var.write_capacity
@@ -22,4 +22,10 @@ resource "aws_dynamodb_table" "dynamodb-table" {
             type = attribute.value.type
         }
     }
+}
+
+resource "aws_dynamodb_table_item" "dynamodb-item" {
+    table_name = var.table_name
+    hash_key = var.hash_key
+    item = var.table_item
 }

@@ -18,12 +18,12 @@ provider "aws" {
 # variables.tf -> main.tf -> module/dynamodb/variables.tf -> module/dynamodb/main.tf
 module "dynamdb_table_one" {
     source = "./modules/dynamodb"
-    name = "people"
+    table_name = "people"
     read_capacity = var.read_capacity
     write_capacity = var.write_capacity
     range_key = var.range_key
     hash_key = var.hash_key
     attributes = var.attributes
     # Read in data here
-    data = jsondecod(file("data/data.json"))
+    table_item = jsondecod(file("data/data.json"))
 }

@@ -18,6 +18,6 @@ variable "hash_key" {
     default = []
 }
 
-variable "name" {
+variable "table_name" {
     default = []
 }
