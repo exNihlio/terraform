@@ -5,10 +5,10 @@ variable "write_capacity" {
     default = "20"
 }
 variable "hash_key" {
-    default = "name"
+    default = "last_name"
 }
 variable "range_key" {
-    default = "age"
+    default = "index"
 }
 # HCL array of dicts
 variable "attributes" {
@@ -16,5 +16,5 @@ variable "attributes" {
     default = [ {name = "last_name",
                  type = "S"},
                 {name = "index",
-                 type = "N"}]
+                 type = "N"} ]
 }
