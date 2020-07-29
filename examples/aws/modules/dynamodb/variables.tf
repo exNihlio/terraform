@@ -13,8 +13,8 @@ variable "range_key" {
 # HCL array of dicts
 variable "attributes" {
     # The 'type' must be either [ 'B', 'S', 'N' ]. This is ALL that will be accepted
-    default = [ {name = "name",
+    default = [ {name = "last_name",
                  type = "S"},
-                {name = "age",
+                {name = "index",
                  type = "N"}]
 }
