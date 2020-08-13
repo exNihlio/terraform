@@ -1,3 +1,3 @@
-resource "aws_codebuild_project" "sample" {
-
-}
+#resource "aws_codebuild_project" "sample" {
+#
+#}
