@@ -11,5 +11,5 @@ variable "github_url" {
 }
 
 variable "build_image" {
-    default = "centos:7"
+    default = "aws/codebuild/standard:4.0"
 }
