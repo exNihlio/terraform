@@ -18,5 +18,23 @@ resource "aws_codebuild_project" "sample" {
         image = var.build_image
         compute_type =  "BUILD_GENERAL1_SMALL"
         privileged_mode = "true"
+        
+        environment_variable {
+            name = "IMAGE_REPO_NAME"
+            value = var.image_repo_name
+        }
+        environment_variable {
+            name = "IMAGE_TAG"
+            value = var.image_tag
+        }
+        environment_variable {
+            name = "AWS_ACCOUNT_ID" 
+            value = data.aws_caller_identity.current.id
+        }
+        environment_variable {
+            name = "AWS_DEFAULT_REGION"
+            value = var.aws_default_region
+        }
     }
+    depends_on = [ aws_ecr_repository.myflask ]
 }
