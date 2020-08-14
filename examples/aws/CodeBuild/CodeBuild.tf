@@ -29,7 +29,7 @@ resource "aws_codebuild_project" "sample" {
         }
         environment_variable {
             name = "AWS_ACCOUNT_ID" 
-            value = data.aws_caller_identity.current.id
+            value = data.aws_caller_identity.current.account_id
         }
         environment_variable {
             name = "AWS_DEFAULT_REGION"
