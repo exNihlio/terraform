@@ -1,0 +1,28 @@
+[
+    {
+        "name": "flaskapp",
+        "image": "",
+        "memoryReservation": 512,
+        "cpu": 256,
+        "essential": true,
+        "portMappings": [
+            {
+                "hostPort": 8000,
+                "containerPort":8000,
+                "protocol": "tcp"
+            }
+        ],
+        "environment" : [
+            { 
+                "name" : "foo", 
+                "value" : "bar"
+            },
+            { 
+                "name" : "buzz", 
+                "value" : "bazz"
+            }
+        ],
+        "secrets": [
+        ]
+    }
+]
