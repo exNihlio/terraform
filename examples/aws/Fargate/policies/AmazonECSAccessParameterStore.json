@@ -1,0 +1,24 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": [
+          "ssm:GetParameters",
+          "kms:Decrypt"
+        ],
+        "Resource": [
+          "arn:aws:ssm:us-west-2:305760793472:parameter/ecr_password",
+          "arn:aws:ssm:us-west-2:305760793472:parameter/avlog_db_password",
+          "arn:aws:ssm:us-west-2:305760793472:parameter/avlog_pg_endpoint",
+          "arn:aws:ssm:us-west-2:305760793472:parameter/avlog_pg_user",
+          "arn:aws:ssm:us-west-2:305760793472:parameter/pgadmin_email",
+          "arn:aws:ssm:us-west-2:305760793472:parameter/pgadmin_password",
+          "arn:aws:ssm:us-west-2:305760793472:parameter/pgadmin_tls",
+          "arn:aws:ssm:us-west-2:305760793472:parameter/pgadmin_login_banner",
+          "arn:aws:ssm:us-west-2:305760793472:parameter/ecr_endpoint",
+          "arn:aws:kms:us-west-2:305760793472:key/cc83541c-87e1-44b7-9592-14d222ca4b12"
+        ]
+      }
+    ]
+  }
