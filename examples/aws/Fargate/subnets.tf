@@ -3,7 +3,7 @@ resource "aws_subnet" "sub-pub-1" {
     vpc_id = aws_vpc.flaskapp-vpc.id
     cidr_block = "10.72.1.0/24"
     availability_zone = "us-west-2a"
-    tags {
+    tags = {
         Name = "flask-app-sub-pub-1"
         manager = "terraform"
     }

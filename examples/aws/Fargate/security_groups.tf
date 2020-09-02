@@ -25,6 +25,7 @@ resource "aws_security_group" "alb-flaskapp-public-sg" {
 resource "aws_security_group" "flaskapp-sg" {
     name = "flaskapp-sg"
     description = "SG to allow incoming connections to flask ecs service"
+    vpc_id = aws_vpc.flaskapp-vpc.id 
     ingress {
         from_port = 8000
         to_port = 8000
