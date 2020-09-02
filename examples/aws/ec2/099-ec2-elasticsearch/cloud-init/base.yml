@@ -1,0 +1,11 @@
+#cloud-config
+# This is an extremely minimal config for creating an arbitrary user with public/private
+# keypair. Much more sophisticated configs/examples can be found on https://cloudinit.readthedocs.io/en/latest/ 
+users:
+  # It is advised to change the user name to something unique
+  - name: user
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    ssh_authorized_keys:
+      # Example format for an ed25519 below. Add your actual public key
+      # - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILkFZyn38amawihdL14q8H6igxZJEX2i0xAEEpsagGNVv3b3 user@foobar.net
