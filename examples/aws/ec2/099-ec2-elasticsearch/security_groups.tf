@@ -42,23 +42,23 @@ resource "aws_security_group" "es_sg" {
         from_port = 9200
         to_port = 9200
         protocol = "TCP"
-        cidr_blocks = [ aws_subnet.priv-sub-1.id,
-                        aws_subnet.priv-sub-2.id,
-                        aws_subnet.priv-sub-3.id ]
+        cidr_blocks = [ aws_subnet.priv-sub-1.cidr_block,
+                        aws_subnet.priv-sub-2.cidr_block,
+                        aws_subnet.priv-sub-3.cidr_block ]
     }
     ingress {
         from_port = 9300
         to_port = 9300
         protocol = "TCP"
-        cidr_blocks = [ aws_subnet.priv-sub-1.id,
-                        aws_subnet.priv-sub-2.id,
-                        aws_subnet.priv-sub-3.id ]
+        cidr_blocks = [ aws_subnet.priv-sub-1.cidr_block,
+                        aws_subnet.priv-sub-2.cidr_block,
+                        aws_subnet.priv-sub-3.cidr_block ]
     }
     ingress {
         from_port = 22
         to_port = 22
         protocol = "TCP"
-        cidr_blocks = [ aws_subnet.pub-sub-1.id ]
+        cidr_blocks = [ aws_subnet.pub-sub-1.cidr_block ]
     }
     egress {
         from_port = 0
