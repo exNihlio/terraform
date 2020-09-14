@@ -33,7 +33,7 @@ resource "aws_instance" "jump-host-1" {
 
 resource "aws_instance" "es-node-1" {
     ami = var.us-west-2a-amd64-2004
-    instance_type = "t2.micro"
+    instance_type = "t2.small"
     user_data = file("cloud-init/base.yml")
     subnet_id = aws_subnet.priv-sub-1.id
     associate_public_ip_address = "false"
@@ -47,7 +47,7 @@ resource "aws_instance" "es-node-1" {
 
 resource "aws_instance" "es-node-2" {
     ami = var.us-west-2a-amd64-2004
-    instance_type = "t2.medium"
+    instance_type = "t2.small"
     user_data = file("cloud-init/base.yml")
     subnet_id = aws_subnet.priv-sub-2.id
     associate_public_ip_address = "false"
@@ -61,7 +61,7 @@ resource "aws_instance" "es-node-2" {
 
 resource "aws_instance" "es-node-3" {
     ami = var.us-west-2a-amd64-2004
-    instance_type = "t2.medium"
+    instance_type = "t2.small"
     user_data = file("cloud-init/base.yml")
     subnet_id = aws_subnet.priv-sub-3.id
     associate_public_ip_address = "false"
