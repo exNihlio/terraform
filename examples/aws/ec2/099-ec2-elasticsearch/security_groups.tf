@@ -39,6 +39,14 @@ resource "aws_security_group" "es_sg" {
     description = "Allow SSH from jump host and ES traffic"
     vpc_id = aws_vpc.elasticsearch-vpc.id
     ingress {
+        from_port = 0
+        to_port = 0
+        protocol = "ICMP"
+        cidr_blocks = [ aws_subnet.priv-sub-1.cidr_block,
+                        aws_subnet.priv-sub-2.cidr_block,
+                        aws_subnet.priv-sub-3.cidr_block ]
+    }
+    ingress {
         from_port = 9200
         to_port = 9200
         protocol = "TCP"
