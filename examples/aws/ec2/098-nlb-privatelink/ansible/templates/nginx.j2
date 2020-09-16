@@ -34,7 +34,7 @@ http {
 
     server {
         listen 80;
-        server_name {{ inventory_hostname }}
+        server_name {{ inventory_hostname }};
         #listen       443 ssl proxy_protocol;
         #server_name  {{ inventory_hostname }};
         #set_real_ip_from 10.0.2.73;
