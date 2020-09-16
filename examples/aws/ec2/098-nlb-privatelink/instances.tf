@@ -17,58 +17,59 @@
 # available to SSH into.  
 
 # Read about cloud-init in the cloud-init-readme.md here in this lesson
-resource "aws_instance" "jump-host-1" {
+
+## Jump host for client VPC
+resource "aws_instance" "sgw-client-1" {
     ami = var.us-west-2a-amd64-2004
     instance_type = "t2.micro"
     user_data = file("cloud-init/base.yml")
-    subnet_id = aws_subnet.pub-sub-1.id
+    subnet_id = aws_subnet.pub_sub_1.id
     associate_public_ip_address = "true"
-    vpc_security_group_ids = [ aws_security_group.ssh-only.id ]
-    availability_zone = "us-west-2a"
+    vpc_security_group_ids = [ aws_security_group.ssh_only_client.id ]
+    #availability_zone = "us-west-2a"
     tags = {
-        Name = "test-instance-1"
+        Name = "sgw-1"
+        Manager = "terraform"
+    }
+}
+## Jump host for server VPC
+resource "aws_instance" "sgw-server-1" {
+    ami = var.us-west-2a-amd64-2004
+    instance_type = "t2.micro"
+    user_data = file("cloud-init/base.yml")
+    subnet_id = aws_subnet.server_pub_sub_1.id
+    associate_public_ip_address = "true"
+    vpc_security_group_ids = [ aws_security_group.ssh_only_server.id ]
+    #availability_zone = "us-west-2a"
+    tags = {
+        Name = "sgw-server-2"
+        Manager = "terraform"
+    }
+}
+resource "aws_instance" "nlb-client-1" {
+    ami = var.us-west-2a-amd64-2004
+    instance_type = "t2.micro"
+    user_data = file("cloud-init/base.yml")
+    subnet_id = aws_subnet.priv_sub_1.id
+    associate_public_ip_address = "false"
+    vpc_security_group_ids = [ aws_security_group.client_sg.id ]
+    #availability_zone = "us-west-2a"
+    tags = {
+        Name = "nlb-server-1"
         Manager = "terraform"
     }
 }
 
-resource "aws_instance" "es-node-1" {
+resource "aws_instance" "nlb-server-1" {
     ami = var.us-west-2a-amd64-2004
-    instance_type = "t2.small"
+    instance_type = "t2.micro"
     user_data = file("cloud-init/base.yml")
-    subnet_id = aws_subnet.priv-sub-1.id
+    subnet_id = aws_subnet.server_priv_sub_1.id
     associate_public_ip_address = "false"
-    vpc_security_group_ids = [ aws_security_group.es_sg.id ]
-    availability_zone = "us-west-2a"
+    vpc_security_group_ids = [ aws_security_group.web_sg.id ]
+    #availability_zone = "us-west-2a"
     tags = {
-        Name = "es-node-1"
-        Manager = "terraform"
-    }
-}
-
-resource "aws_instance" "es-node-2" {
-    ami = var.us-west-2a-amd64-2004
-    instance_type = "t2.small"
-    user_data = file("cloud-init/base.yml")
-    subnet_id = aws_subnet.priv-sub-2.id
-    associate_public_ip_address = "false"
-    vpc_security_group_ids = [ aws_security_group.es_sg.id ]
-    availability_zone = "us-west-2b"
-    tags = {
-        Name = "es-node-2"
-        Manager = "terraform"
-    }
-}
-
-resource "aws_instance" "es-node-3" {
-    ami = var.us-west-2a-amd64-2004
-    instance_type = "t2.small"
-    user_data = file("cloud-init/base.yml")
-    subnet_id = aws_subnet.priv-sub-3.id
-    associate_public_ip_address = "false"
-    vpc_security_group_ids = [ aws_security_group.es_sg.id ]
-    availability_zone = "us-west-2c"
-    tags = {
-        Name = "es-node-3"
+        Name = "nlb-server-1"
         Manager = "terraform"
     }
 }

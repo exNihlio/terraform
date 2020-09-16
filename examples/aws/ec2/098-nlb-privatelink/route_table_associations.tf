@@ -2,22 +2,36 @@
 # In this case, the public subnet will associated with a route that
 # will send all non-local traffic to the internet gateway, effectively
 # giving this subnet public internet access. 
-resource "aws_route_table_association" "sub_1" {
-    subnet_id = aws_subnet.pub-sub-1.id
-    route_table_id = aws_route_table.igw.id
+
+# Client subnets
+resource "aws_route_table_association" "client_pub_sub_1" {
+    subnet_id = aws_subnet.pub_sub_1.id
+    route_table_id = aws_route_table.client_igw.id
 }
 
-resource "aws_route_table_association" "sub-priv-1" {
-    subnet_id = aws_subnet.priv-sub-1.id
-    route_table_id = aws_route_table.ngw.id
+resource "aws_route_table_association" "client_priv_sub_1" {
+    subnet_id = aws_subnet.priv_sub_1.id
+    route_table_id = aws_route_table.client_ngw.id
+}
+## Server Subnets
+resource "aws_route_table_association" "server_pub_sub_1" {
+    subnet_id = aws_subnet.server_pub_sub_1.id
+    route_table_id = aws_route_table.server_igw.id
 }
 
-resource "aws_route_table_association" "sub-priv-2" {
-    subnet_id = aws_subnet.priv-sub-2.id
-    route_table_id = aws_route_table.ngw.id
+resource "aws_route_table_association" "server_priv_sub_1" {
+    subnet_id = aws_subnet.server_priv_sub_1.id
+    route_table_id = aws_route_table.server_ngw.id
 }
+########################
+## PrivateLink Routes ##
+########################
+# resource "aws_route_table_association" "sub-priv-1" {
+#     subnet_id = aws_subnet.priv-sub-1.id
+#     route_table_id = aws_route_table.ngw.id
+# }
 
-resource "aws_route_table_association" "sub-priv-3" {
-    subnet_id = aws_subnet.priv-sub-3.id
-    route_table_id = aws_route_table.ngw.id
-}
+# resource "aws_route_table_association" "sub-priv-1" {
+#     subnet_id = aws_subnet.priv-sub-1.id
+#     route_table_id = aws_route_table.ngw.id
+# }
