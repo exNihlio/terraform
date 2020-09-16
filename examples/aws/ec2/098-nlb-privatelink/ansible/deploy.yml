@@ -4,3 +4,37 @@
   tasks:
     - name: True
       shell: /bin/true
+
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Deploy the nginx.conf
+      template:
+        src: templates/nginx.j2
+        dest: /etc/nginx/nginx.conf
+      notify:
+        - restart-nginx
+
+    - name: Deploy the nginx index.html
+      copy:
+        src: templates/index.html
+        dest: /var/www/html/index.html
+      notify:
+        - restart-nginx
+
+    - name: Start nginx
+      systemd:
+        name: nginx
+        state: started
+        enabled: True
+
+  handlers:
+    - name: Restart nginx
+      systemd:
+        name: nginx
+        state: restarted
+        enabled: True
+      listen:
+        - restart-nginx
