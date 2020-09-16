@@ -30,7 +30,7 @@
       file:
         path: /var/www/html/index.nginx-debian.html
         state: absent
-      when: "{{ ansible_facts['os_family'] }}" == "Debian"
+      when: ansible_facts['os_family'] == "Debian"
 
     - name: Start nginx
       systemd:
