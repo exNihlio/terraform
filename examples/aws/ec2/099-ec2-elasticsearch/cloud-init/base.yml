@@ -3,9 +3,9 @@
 # keypair. Much more sophisticated configs/examples can be found on https://cloudinit.readthedocs.io/en/latest/ 
 users:
   # It is advised to change the user name to something unique
-  - name: user
+  - name: abeamer
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
     ssh_authorized_keys:
       # Example format for an ed25519 below. Add your actual public key
-      # - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILkFZyn38amawihdL14q8H6igxZJEX2i0xAEEpsagGNVv3b3 user@foobar.net
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILkFZyn38amsLO4q8H6igxZJEX2i0xDXXpsagGNVv3b3 abeamer@3c22fb21db2d.ant.amazon.com
