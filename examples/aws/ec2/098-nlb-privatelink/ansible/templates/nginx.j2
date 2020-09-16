@@ -47,6 +47,7 @@ http {
         #ssl_ciphers HIGH:!aNULL:!MD5;
         #ssl_session_cache shared:SSL:10m;
         #access_log  logs/host.access.log  main;
+        root /var/www/html;
         location / {
             root   html;
             index  index.html index.htm;
