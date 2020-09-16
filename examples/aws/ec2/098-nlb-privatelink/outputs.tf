@@ -17,7 +17,7 @@ output "ServerVPCID" {
 }
 # NLB Subnets (private subnets)
 output "NLBsubnets" {
-    value = join(", ", [aws_subnet.priv_sub_1.id, aws_subnet.server_priv_sub_1.id])
+    value = join(", ", [aws_subnet.server_priv_sub_1.id, aws_subnet.server_priv_sub_2.id])
 }
 
 # VPC Endpoint subnets (endpoint subnets)

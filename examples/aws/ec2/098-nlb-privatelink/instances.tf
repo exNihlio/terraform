@@ -73,3 +73,17 @@ resource "aws_instance" "nlb-server-1" {
         Manager = "terraform"
     }
 }
+
+resource "aws_instance" "nlb-server-2" {
+    ami = var.us-west-2a-amd64-2004
+    instance_type = "t2.micro"
+    user_data = file("cloud-init/base.yml")
+    subnet_id = aws_subnet.server_priv_sub_2.id
+    associate_public_ip_address = "false"
+    vpc_security_group_ids = [ aws_security_group.web_sg.id ]
+    #availability_zone = "us-west-2a"
+    tags = {
+        Name = "nlb-server-2"
+        Manager = "terraform"
+    }
+}

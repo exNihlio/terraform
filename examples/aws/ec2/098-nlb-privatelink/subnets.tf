@@ -59,6 +59,16 @@ resource "aws_subnet" "server_priv_sub_1" {
     }
 }
 
+resource "aws_subnet" "server_priv_sub_2" {
+    cidr_block = "10.73.3.0/24"
+    vpc_id = aws_vpc.privatelink_server_vpc.id
+    availability_zone = "us-west-2b"
+    tags = {
+        Name = "server-priv-sub-2"
+        Manager = "terraform"
+    }
+}
+
 ## PrivateLink Endpoint
 resource "aws_subnet" "priv_endpoint_2" {
     cidr_block = "10.73.5.0/24"

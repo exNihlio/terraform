@@ -23,6 +23,11 @@ resource "aws_route_table_association" "server_priv_sub_1" {
     subnet_id = aws_subnet.server_priv_sub_1.id
     route_table_id = aws_route_table.server_ngw.id
 }
+
+resource "aws_route_table_association" "server_priv_sub_2" {
+    subnet_id = aws_subnet.server_priv_sub_2.id
+    route_table_id = aws_route_table.server_ngw.id
+}
 ########################
 ## PrivateLink Routes ##
 ########################
