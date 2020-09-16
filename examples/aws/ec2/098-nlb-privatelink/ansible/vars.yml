@@ -1,0 +1,5 @@
+webHosts: |
+  [webhosts]
+  nlb-server-1.nlb.dev
+  nlb-server-2.nlb.dev
+hostsFile: "/etc/ansible/hosts"

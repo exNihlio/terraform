@@ -1,0 +1,6 @@
+- hosts: webhosts
+  gather_facts: yes
+  become: yes
+  tasks:
+    - name: True
+      shell: /bin/true

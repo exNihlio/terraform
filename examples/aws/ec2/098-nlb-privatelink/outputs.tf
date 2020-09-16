@@ -29,3 +29,11 @@ output "VPCEndpointSubnets" {
 output "SourceSecurityGroupID" {
     value = aws_security_group.client_sg.id
 }
+
+output "nlb-server-1" {
+    value = aws_instance.nlb-server-1.private_ip
+}
+
+output "nlb-server-2" {
+    value = aws_instance.nlb-server-2.private_ip
+}
