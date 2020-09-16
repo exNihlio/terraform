@@ -23,7 +23,6 @@
         dest: /var/www/html/index.html
         owner: root
         group: root
-        state: present
       notify:
         - restart-nginx
 
