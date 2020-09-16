@@ -33,7 +33,7 @@ http {
     #gzip  on;
 
     server {
-        listen 80
+        listen 80;
         server_name {{ inventory_hostname }}
         #listen       443 ssl proxy_protocol;
         #server_name  {{ inventory_hostname }};
