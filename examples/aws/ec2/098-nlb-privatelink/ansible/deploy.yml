@@ -2,9 +2,6 @@
   gather_facts: yes
   become: yes
   tasks:
-    - name: True
-      shell: /bin/true
-
     - name: Install nginx
       apt:
         name: nginx
@@ -14,13 +11,19 @@
       template:
         src: templates/nginx.j2
         dest: /etc/nginx/nginx.conf
+        owner: root
+        group: nginx
+        mode: 0644
       notify:
         - restart-nginx
 
     - name: Deploy the nginx index.html
       copy:
-        src: templates/index.html
+        src: templates/index.j2
         dest: /var/www/html/index.html
+        owner: root
+        group: nginx
+        state: present
       notify:
         - restart-nginx
 
