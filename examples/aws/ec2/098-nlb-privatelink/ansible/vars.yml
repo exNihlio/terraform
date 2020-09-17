@@ -3,3 +3,5 @@ webHosts: |
   nlb-server-1.nlb.server
   nlb-server-2.nlb.server
 hostsFile: "/etc/ansible/hosts"
+certName: "star-nlb-cert.crt"
+keyName: "star-nlb-key.key"

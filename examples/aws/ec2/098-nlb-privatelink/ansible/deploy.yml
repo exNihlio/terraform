@@ -7,6 +7,26 @@
         name: nginx
         state: present
 
+    - name: Deploy the star-nlb-server certificate
+      copy:
+        src: files/"{{ certName }}"
+        dest: /etc/ssl/certs/
+        owner: root
+        group: root
+        mode: 0600
+      notify:
+        - restart-nginx
+
+    - name: Deploy the star-nlb-server key
+      copy:
+        src: files/"{{ keyName }}"
+        dest: /etc/ssl/private
+        owner: root
+        group: root
+        mode: 0600
+      notify:
+        - restart-nginx
+
     - name: Deploy the nginx.conf
       template:
         src: templates/nginx.j2
