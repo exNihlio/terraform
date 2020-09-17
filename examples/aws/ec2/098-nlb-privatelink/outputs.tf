@@ -37,3 +37,7 @@ output "nlb-server-1" {
 output "nlb-server-2" {
     value = aws_instance.nlb-server-2.private_ip
 }
+
+output "nlb-cname" {
+    value = aws_lb.nlb_private_link.dns_name
+}
