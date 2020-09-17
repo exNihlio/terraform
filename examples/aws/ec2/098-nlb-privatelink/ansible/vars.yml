@@ -5,3 +5,4 @@ webHosts: |
 hostsFile: "/etc/ansible/hosts"
 certName: "star-nlb-cert.crt"
 keyName: "star-nlb-key.key"
+upstreamNLB: "10.73.1.149"

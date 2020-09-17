@@ -21,3 +21,11 @@ resource "aws_route53_record" "nlb-server-2" {
     ttl = "300"
     records = [ aws_instance.nlb-server-2.private_ip ]   
 }
+
+resource "aws_route53_record" "nlb-lb" {
+    zone_id = aws_route53_zone.server.id
+    name = "lb"
+    type = "CNAME"
+    ttl = "300"
+    records = [ aws_lb.nlb_private_link.dns_name ]   
+}
