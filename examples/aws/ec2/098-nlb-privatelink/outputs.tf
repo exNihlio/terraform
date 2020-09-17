@@ -42,14 +42,6 @@ output "nlb-cname" {
     value = aws_lb.nlb_private_link.dns_name
 }
 
-# output "privatelink_base_endpoint_dns" {
-#     value = aws_vpc_endpoint_service.privatelink_service.base_endpoint_dns_names
-# }
-
-# output "privatelink_private_endpoint_dns" {
-#     value = aws_vpc_endpoint_service.privatelink_service.private_dns_name
-# }
-
 output "privatelink_client_dns" {
     value = aws_vpc_endpoint.privatelink.dns_entry[0]["dns_name"]
 }
