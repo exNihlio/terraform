@@ -11,7 +11,7 @@
 
     - name: Deploy the star-nlb-server certificate
       copy:
-        src: files/"{{ certName }}"
+        src: "{{ certName }}"
         dest: /etc/ssl/certs/
         owner: root
         group: root
@@ -21,7 +21,7 @@
 
     - name: Deploy the star-nlb-server key
       copy:
-        src: files/"{{ keyName }}"
+        src: "{{ keyName }}"
         dest: /etc/ssl/private
         owner: root
         group: root
