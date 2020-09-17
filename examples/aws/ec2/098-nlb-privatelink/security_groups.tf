@@ -111,3 +111,16 @@ resource "aws_security_group" "nlb_web_sg" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 }
+
+## VPC endpoint security group
+resource "aws_security_group" "endpoint_web_sg" {
+    name = "endpoint-web-sg"
+    description = "Allow https connections through the VPC endpoint service"
+    vpc_id = aws_vpc.privatelink_client_vpc.id
+    ingress {
+        from_port = 443
+        to_port = 443
+        protocol = "TCP"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+}

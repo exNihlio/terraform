@@ -1,12 +1,12 @@
-resource "aws_lb_listener" "privatelink_http" {
-    load_balancer_arn = aws_lb.nlb_private_link.arn
-    port = 80
-    protocol = "TCP"
-    default_action {
-      type = "forward"
-      target_group_arn = aws_lb_target_group.privatelink_http_tg.arn
-    }
-}
+# resource "aws_lb_listener" "privatelink_http" {
+#     load_balancer_arn = aws_lb.nlb_private_link.arn
+#     port = 80
+#     protocol = "TCP"
+#     default_action {
+#       type = "forward"
+#       target_group_arn = aws_lb_target_group.privatelink_http_tg.arn
+#     }
+# }
 
 resource "aws_lb_listener" "privatelink_https" {
     load_balancer_arn = aws_lb.nlb_private_link.arn
