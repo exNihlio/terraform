@@ -1,0 +1,20 @@
+esVersion: "7.9.1"
+esUser: "elasticsearch"
+osFamily:
+  Debian: "amd64.deb"
+  RedHat: "x86_64.rpm"
+  CentOS: "x86_64.rpm"
+esDiscoveryHosts:
+  - es-node-1.es.dev
+  - es-node-2.es.dev
+  - es-node-3.es.dev
+esMasterNodes:
+  - es-node-1.es.dev
+javaVersion: 8
+esURL:
+  Debian: https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-{{ esVersion }}-amd64.deb
+  RedHat: ""
+  CentOS: ""
+javaURL:
+  Debian: https://corretto.aws/downloads/latest/amazon-corretto-8-x64-linux-jdk.deb
+  RedHat: https://corretto.aws/downloads/latest/amazon-corretto-8-x64-linux-jdk.rpm

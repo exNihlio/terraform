@@ -1,0 +1,90 @@
+- hosts: elasticsearch
+  gather_facts: yes
+  become: yes
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Set the system hostname
+      hostname:
+        name: "{{ inventory_hostname }}"
+        use: systemd
+      when: ansible_facts['os_family'] == "Debian"
+    
+    # Ubuntu/Debian Path - OS SPECIFIC!
+    - name: Install the java-common package
+      apt:
+        name: java-common
+        state: present
+      when: ansible_facts['os_family'] == "Debian"
+
+    # - name: Download Amazon Corretto for Ubuntu/Debian
+    #   get_url:
+    #     url: "{{ javaURL.Debian }}"
+    #     dest: /root/corretto_8.deb
+    #   when: ansible_facts['os_family'] == "Debian"
+
+    - name: Install Amazon Corretto for Ubuntu/Debian
+      apt:
+        deb: "{{ javaURL.Debian }}"
+        state: present
+
+    - name: Install Elasticsearch for Ubuntu/Debian
+      apt:
+        deb: "{{ esURL.Debian }}"
+        state: present
+   # Configuration Portion
+    - name: Render the elasticsearch template
+      template:
+        src: es_config_files/{{ esVersion }}/elasticsearch.j2
+        dest: /etc/elasticsearch/elasticsearch.yml
+        owner: root
+        group: elasticsearch
+        mode: 0640
+      notify:
+        - restart-elasticsearch
+    # Elasticsearch needs to lock memory
+    - name: Give Elasticsearch unlimited memory locking
+      template:
+        src: es_config_files/elasticsearch.j2
+        dest: /etc/security/limits.d/elasticsearch.conf
+        owner: root
+        group: root
+        mode: 0644
+      notify:
+        - restart-elasticsearch
+
+    - name: Create the systemd elasticsearch override file
+      file:
+        path: /usr/lib/systemd/system/elasticsearch.service.d/
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+
+    - name: Deploy the elasticsearch systemd override file
+      copy:
+        src: es_config_files/override.conf
+        dest: /usr/lib/systemd/system/elasticsearch.service.d/
+        owner: root
+        group: root
+        mode: 0644
+      notify:
+        - restart-elasticsearch
+
+    - name: Start elasticsearch
+      systemd:
+        name: elasticsearch
+        state: started
+        enabled: true
+        daemon_reload: true
+
+  handlers:
+    - name: Restart elasticsearch
+      systemd:
+        name: elasticsearch
+        state: restarted
+        enabled: True
+        daemon_reload: True
+      listen:
+        - restart-elasticsearch
+      
