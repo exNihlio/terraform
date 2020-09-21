@@ -1,9 +1,8 @@
-etcdHosts: |
+hostsFile: |
   [etcd]
   etcd-node-1.okd.dev
   etcd-node-2.okd.dev
   etcd-node-3.okd.dev
-okdHosts: |
   [okd]
   okd-node-1.okd.dev
   okd-node-2.okd.dev
