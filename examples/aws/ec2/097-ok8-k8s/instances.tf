@@ -18,7 +18,7 @@
 
 # Read about cloud-init in the cloud-init-readme.md here in this lesson
 resource "aws_instance" "sgw-1" {
-    ami = var.us-west-2a-rhel8-amd64
+    ami = var.us-west-2a-centos7-amd64
     instance_type = "t2.micro"
     user_data = file("cloud-init/base.yml")
     subnet_id = aws_subnet.pub-sub-1.id
@@ -32,7 +32,7 @@ resource "aws_instance" "sgw-1" {
 }
 
 resource "aws_instance" "okd-node-1" {
-    ami = var.us-west-2a-rhel8-amd64
+    ami = var.us-west-2a-centos7-amd64
     instance_type = "t2.small"
     user_data = file("cloud-init/base.yml")
     subnet_id = aws_subnet.priv-sub-1.id
@@ -46,7 +46,7 @@ resource "aws_instance" "okd-node-1" {
 }
 
 resource "aws_instance" "okd-node-2" {
-    ami = var.us-west-2a-rhel8-amd64
+    ami = var.us-west-2a-centos7-amd64
     instance_type = "t2.small"
     user_data = file("cloud-init/base.yml")
     subnet_id = aws_subnet.priv-sub-2.id
@@ -60,7 +60,7 @@ resource "aws_instance" "okd-node-2" {
 }
 
 resource "aws_instance" "okd-node-3" {
-    ami = var.us-west-2a-rhel8-amd64
+    ami = var.us-west-2a-centos7-amd64
     instance_type = "t2.small"
     user_data = file("cloud-init/base.yml")
     subnet_id = aws_subnet.priv-sub-3.id
