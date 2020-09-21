@@ -12,4 +12,4 @@ etcdVersion: v3.4.13
 ectdURL: https://github.com/etcd-io/etcd/releases/download/
 etcdPlatform: linux
 osArch: amd64
-etcdDownloadURL: {{etcdURL}}/{{etcdVersion}}/etcd-{{etcdVersion}}-{{etcdPlatform}}-{{osArch}}.tar.gz
+etcdDownloadURL: "{{etcdURL}}/{{etcdVersion}}/etcd-{{etcdVersion}}-{{etcdPlatform}}-{{osArch}}.tar.gz"
