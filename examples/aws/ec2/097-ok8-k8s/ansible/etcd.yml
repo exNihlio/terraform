@@ -4,13 +4,10 @@
   vars_files:
     - vars.yml
   tasks:
-    - name: Output the etcd file version
-      debug:
-        msg: "{{ etcdFile }}"
-    # - name: Download etcd archive
-    #   get_url:
-    #     url: 
-    #     dest: /tmp/
+    - name: Download etcd archive
+      get_url:
+        url: "{{ etcdDownloadURL }}"
+        dest: /tmp/
 
     - name: Untar etcd
 
