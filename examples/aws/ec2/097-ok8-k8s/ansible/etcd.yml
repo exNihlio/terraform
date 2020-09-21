@@ -1,0 +1,35 @@
+- hosts: etcd
+  gather_facts: yes
+  become: yes
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Output the etcd file version
+      debug:
+        msg: "{{ etcdFile }}"
+    # - name: Download etcd archive
+    #   get_url:
+    #     url: 
+    #     dest: /tmp/
+
+    - name: Untar etcd
+
+    - name: Create etcd service file
+
+    - name: Copy etcd certificate
+
+    - name: Copy etcd key
+
+    - name: Copy etcd ca-cert.crt
+
+    - name: Ensure etcd is running
+
+  handlers:
+    - name: Restart etcd
+      systemd:
+        name: etcd
+        state: restarted
+        daemon_reload: True
+        enabled: True
+      listen:
+        - restart-etcd

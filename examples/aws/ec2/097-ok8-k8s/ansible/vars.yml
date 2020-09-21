@@ -11,4 +11,9 @@ etcdVersion: v3.4.13
 ectdURL: https://github.com/etcd-io/etcd/releases/download/
 etcdPlatform: linux
 osArch: amd64
+etcdArchive:
+  darwin: "zip"
+  windows: "zip"
+  linux: "tar.gz"
+etcdFile: "etcd-{{etcdVersion}}-{{ etcdPlatform}}-{{osArch}}.{{ etcdArchive.{{osArchive }}"
 etcdDownloadURL: "{{etcdURL}}/{{etcdVersion}}/etcd-{{etcdVersion}}-{{etcdPlatform}}-{{osArch}}.tar.gz"
