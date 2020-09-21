@@ -1,13 +1,13 @@
 etcdHosts: |
-[etcd]
-etcd-node-1.okd.dev
-etcd-node-2.okd.dev
-etcd-node-3.okd.dev
+  [etcd]
+  etcd-node-1.okd.dev
+  etcd-node-2.okd.dev
+  etcd-node-3.okd.dev
 okdHosts: |
-[okd]
-okd-node-1.okd.dev
-okd-node-2.okd.dev
-okd-node-3.okd.dev
+  [okd]
+  okd-node-1.okd.dev
+  okd-node-2.okd.dev
+  okd-node-3.okd.dev
 etcdVersion: v3.4.13
 ectdURL: https://github.com/etcd-io/etcd/releases/download/
 etcdPlatform: linux
