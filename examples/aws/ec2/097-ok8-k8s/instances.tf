@@ -18,7 +18,7 @@
 
 # Read about cloud-init in the cloud-init-readme.md here in this lesson
 resource "aws_instance" "sgw-1" {
-    ami = var.us-west-2a-centos7-amd64
+    ami = var.us-west-2a-centos8-amd64
     instance_type = "t2.micro"
     user_data = file("cloud-init/base.yml")
     subnet_id = aws_subnet.pub-sub-1.id
@@ -32,12 +32,12 @@ resource "aws_instance" "sgw-1" {
 }
 
 resource "aws_instance" "okd-node-1" {
-    ami = var.us-west-2a-centos7-amd64
+    ami = var.us-west-2a-centos8-amd64
     instance_type = "t2.small"
     user_data = file("cloud-init/base.yml")
     subnet_id = aws_subnet.priv-sub-1.id
     associate_public_ip_address = "false"
-    vpc_security_group_ids = [ aws_security_group.es_sg.id ]
+    vpc_security_group_ids = [ aws_security_group.okd_sg.id ]
     availability_zone = "us-west-2a"
     tags = {
         Name = "okd-node-1"
@@ -46,12 +46,12 @@ resource "aws_instance" "okd-node-1" {
 }
 
 resource "aws_instance" "okd-node-2" {
-    ami = var.us-west-2a-centos7-amd64
+    ami = var.us-west-2a-centos8-amd64
     instance_type = "t2.small"
     user_data = file("cloud-init/base.yml")
     subnet_id = aws_subnet.priv-sub-2.id
     associate_public_ip_address = "false"
-    vpc_security_group_ids = [ aws_security_group.es_sg.id ]
+    vpc_security_group_ids = [ aws_security_group.okd_sg.id ]
     availability_zone = "us-west-2b"
     tags = {
         Name = "okd-node-2"
@@ -60,15 +60,57 @@ resource "aws_instance" "okd-node-2" {
 }
 
 resource "aws_instance" "okd-node-3" {
-    ami = var.us-west-2a-centos7-amd64
+    ami = var.us-west-2a-centos8-amd64
     instance_type = "t2.small"
     user_data = file("cloud-init/base.yml")
     subnet_id = aws_subnet.priv-sub-3.id
     associate_public_ip_address = "false"
-    vpc_security_group_ids = [ aws_security_group.es_sg.id ]
+    vpc_security_group_ids = [ aws_security_group.okd_sg.id ]
     availability_zone = "us-west-2c"
     tags = {
         Name = "okd-node-3"
+        Manager = "terraform"
+    }
+}
+
+resource "aws_instance" "etcd-node-1" {
+    ami = var.us-west-2a-centos8-amd64
+    instance_type = "t2.micro"
+    user_data = file("cloud-init/base.yml")
+    subnet_id = aws_subnet.etcd-sub-1.id
+    associate_public_ip_address = "false"
+    vpc_security_group_ids = [ aws_security_group.etcd_sg.id ]
+    availability_zone = "us-west-2a"
+    tags = {
+        Name = "etcd-node-1"
+        Manager = "terraform"
+    }
+}
+
+resource "aws_instance" "etcd-node-2" {
+    ami = var.us-west-2a-centos8-amd64
+    instance_type = "t2.micro"
+    user_data = file("cloud-init/base.yml")
+    subnet_id = aws_subnet.etcd-sub-2.id
+    associate_public_ip_address = "false"
+    vpc_security_group_ids = [ aws_security_group.etcd_sg.id ]
+    availability_zone = "us-west-2b"
+    tags = {
+        Name = "etcd-node-2"
+        Manager = "terraform"
+    }
+}
+
+resource "aws_instance" "etcd-node-3" {
+    ami = var.us-west-2a-centos8-amd64
+    instance_type = "t2.micro"
+    user_data = file("cloud-init/base.yml")
+    subnet_id = aws_subnet.etcd-sub-3.id
+    associate_public_ip_address = "false"
+    vpc_security_group_ids = [ aws_security_group.etcd_sg.id ]
+    availability_zone = "us-west-2c"
+    tags = {
+        Name = "etcd-node-3"
         Manager = "terraform"
     }
 }

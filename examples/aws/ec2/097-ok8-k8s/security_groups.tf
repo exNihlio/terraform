@@ -34,10 +34,11 @@ resource "aws_security_group" "ssh-only" {
     }
 }
 
-resource "aws_security_group" "es_sg" {
-    name = "es_security_group"
-    description = "Allow SSH from jump host and ES traffic"
+resource "aws_security_group" "okd_sg" {
+    name = "okd_security_group"
+    description = "Security group to allow OKD/k8s traffic"
     vpc_id = aws_vpc.okd-vpc.id
+    ## Allow ICMP traffic
     ingress {
         from_port = 0
         to_port = 0
@@ -46,21 +47,75 @@ resource "aws_security_group" "es_sg" {
                         aws_subnet.priv-sub-2.cidr_block,
                         aws_subnet.priv-sub-3.cidr_block ]
     }
+    # Let us SSH in from the security gateway host
     ingress {
-        from_port = 9200
-        to_port = 9200
+        from_port = 22
+        to_port = 22
+        protocol = "TCP"
+        cidr_blocks = [ aws_subnet.pub-sub-1.cidr_block ]
+    }
+    ## OKD/k8s DNS resolution
+    ingress {
+        from_port = 53
+        to_port = 53
         protocol = "TCP"
         cidr_blocks = [ aws_subnet.priv-sub-1.cidr_block,
                         aws_subnet.priv-sub-2.cidr_block,
                         aws_subnet.priv-sub-3.cidr_block ]
     }
+    ## HTTPS for router use
     ingress {
-        from_port = 9300
-        to_port = 9300
+        from_port = 443
+        to_port = 443
         protocol = "TCP"
         cidr_blocks = [ aws_subnet.priv-sub-1.cidr_block,
                         aws_subnet.priv-sub-2.cidr_block,
                         aws_subnet.priv-sub-3.cidr_block ]
+    }
+    ## VXLAN
+    ingress {
+        from_port = 4789
+        to_port = 4789
+        protocol = "UDP"
+        cidr_blocks = [ aws_subnet.priv-sub-1.cidr_block,
+                        aws_subnet.priv-sub-2.cidr_block,
+                        aws_subnet.priv-sub-3.cidr_block ]
+    }
+    ## OKD Web console
+    ingress {
+        from_port = 8443
+        to_port = 8443
+        protocol = "TCP"
+        cidr_blocks = [ aws_subnet.priv-sub-1.cidr_block,
+                        aws_subnet.priv-sub-2.cidr_block,
+                        aws_subnet.priv-sub-3.cidr_block ]
+    }
+    ## Kubelet
+    ingress {
+        from_port = 10250
+        to_port = 10250
+        protocol = "TCP"
+        cidr_blocks = [ aws_subnet.priv-sub-1.cidr_block,
+                        aws_subnet.priv-sub-2.cidr_block,
+                        aws_subnet.priv-sub-3.cidr_block ]
+    }
+    egress {
+        from_port = 0
+        to_port = 0
+        protocol = "-1"
+        cidr_blocks = [ "0.0.0.0/0" ]
+    }
+}
+
+resource "aws_security_group" "etcd_sg" {
+    name = "etcd_sg"
+    description = "Allow etcd traffic"
+    vpc_id = aws_vpc.okd-vpc.id
+    ingress {
+        from_port = 0
+        to_port = 0
+        protocol = "ICMP"
+        cidr_blocks = ["0.0.0.0/0"]
     }
     ingress {
         from_port = 22
@@ -68,10 +123,21 @@ resource "aws_security_group" "es_sg" {
         protocol = "TCP"
         cidr_blocks = [ aws_subnet.pub-sub-1.cidr_block ]
     }
+    ingress {
+        from_port = 2379
+        to_port = 2380
+        protocol = "TCP"
+        cidr_blocks = [ aws_subnet.priv-sub-1.cidr_block,
+                        aws_subnet.priv-sub-2.cidr_block,
+                        aws_subnet.priv-sub-3.cidr_block,
+                        aws_subnet.etcd-sub-1.cidr_block,
+                        aws_subnet.etcd-sub-2.cidr_block,
+                        aws_subnet.etcd-sub-3.cidr_block]
+    }
     egress {
         from_port = 0
         to_port = 0
         protocol = "-1"
-        cidr_blocks = [ "0.0.0.0/0" ]
+        cidr_blocks = ["0.0.0.0/0"]
     }
 }

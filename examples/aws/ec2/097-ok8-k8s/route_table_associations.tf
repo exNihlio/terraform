@@ -21,3 +21,18 @@ resource "aws_route_table_association" "sub-priv-3" {
     subnet_id = aws_subnet.priv-sub-3.id
     route_table_id = aws_route_table.ngw.id
 }
+
+resource "aws_route_table_association" "etcd-priv-1" {
+    subnet_id = aws_subnet.etcd-sub-1.id
+    route_table_id = aws_route_table.ngw.id
+}
+
+resource "aws_route_table_association" "etcd-priv-2" {
+    subnet_id = aws_subnet.etcd-sub-2.id
+    route_table_id = aws_route_table.ngw.id
+}
+
+resource "aws_route_table_association" "etcd-priv-3" {
+    subnet_id = aws_subnet.etcd-sub-3.id
+    route_table_id = aws_route_table.ngw.id
+}
