@@ -14,6 +14,6 @@ resource "aws_route_table" "igw" {
     # This route does not overwrite the local route.
     route {
         cidr_block = "0.0.0.0/0"
-        gateway_id = aws_internet_gateway.terraform-example
+        gateway_id = aws_internet_gateway.terraform-example.id
     }
 }
