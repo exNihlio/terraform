@@ -55,7 +55,7 @@ resource "aws_instance" "nlb-client-1" {
     vpc_security_group_ids = [ aws_security_group.client_sg.id ]
     #availability_zone = "us-west-2a"
     tags = {
-        Name = "nlb-server-1"
+        Name = "nlb-consumer-1"
         Manager = "terraform"
     }
 }
@@ -69,7 +69,7 @@ resource "aws_instance" "nlb-server-1" {
     vpc_security_group_ids = [ aws_security_group.web_sg.id ]
     #availability_zone = "us-west-2a"
     tags = {
-        Name = "nlb-server-1"
+        Name = "nlb-producer-1"
         Manager = "terraform"
     }
 }
@@ -83,7 +83,7 @@ resource "aws_instance" "nlb-server-2" {
     vpc_security_group_ids = [ aws_security_group.web_sg.id ]
     #availability_zone = "us-west-2a"
     tags = {
-        Name = "nlb-server-2"
+        Name = "nlb-producer-2"
         Manager = "terraform"
     }
 }

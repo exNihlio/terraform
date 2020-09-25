@@ -7,7 +7,8 @@
     - name: Download etcd archive
       get_url:
         url: "{{ etcdDownloadURL }}"
-        dest: /tmp/
+        dest: /tmp/"{{ etcdFile }}"
+        state:
 
   #   - name: Untar etcd
 

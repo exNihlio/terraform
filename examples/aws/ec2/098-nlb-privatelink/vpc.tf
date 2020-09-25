@@ -3,7 +3,7 @@ resource "aws_vpc" "privatelink_client_vpc" {
     enable_dns_hostnames = true
     enable_dns_support = true
     tags = {
-        Name =  "privatelink-vpc"
+        Name =  "privatelink-consumer-vpc"
         Manager = "terraform"
     }
 }
@@ -13,7 +13,7 @@ resource "aws_vpc" "privatelink_server_vpc" {
     enable_dns_hostnames = true
     enable_dns_support = true
     tags = {
-        Name =  "privatelink-server-vpc"
+        Name =  "privatelink-producer-vpc"
         Manager = "terraform"
     }
 }

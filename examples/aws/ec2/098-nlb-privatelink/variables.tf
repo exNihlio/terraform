@@ -5,3 +5,10 @@ variable "us-west-2a-amd64-2004" {
 variable "region" {
     default = "us-west-2"
 }
+
+variable "foo" {
+    default = "bar"
+}
+variable "buzz" {
+    default = "bizz"
+}

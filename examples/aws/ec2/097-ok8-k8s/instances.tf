@@ -26,7 +26,7 @@ resource "aws_instance" "sgw-1" {
     vpc_security_group_ids = [ aws_security_group.ssh-only.id ]
     availability_zone = "us-west-2a"
     tags = {
-        Name = "sg1-1"
+        Name = "sgw-1"
         Manager = "terraform"
     }
 }
@@ -74,7 +74,7 @@ resource "aws_instance" "okd-node-3" {
 }
 
 resource "aws_instance" "etcd-node-1" {
-    ami = var.us-west-2a-centos8-amd64
+    ami = var.us-west-2a-centos7-amd64
     instance_type = "t2.micro"
     user_data = file("cloud-init/base.yml")
     subnet_id = aws_subnet.etcd-sub-1.id
@@ -88,7 +88,7 @@ resource "aws_instance" "etcd-node-1" {
 }
 
 resource "aws_instance" "etcd-node-2" {
-    ami = var.us-west-2a-centos8-amd64
+    ami = var.us-west-2a-centos7-amd64
     instance_type = "t2.micro"
     user_data = file("cloud-init/base.yml")
     subnet_id = aws_subnet.etcd-sub-2.id
@@ -102,7 +102,7 @@ resource "aws_instance" "etcd-node-2" {
 }
 
 resource "aws_instance" "etcd-node-3" {
-    ami = var.us-west-2a-centos8-amd64
+    ami = var.us-west-2a-centos7-amd64
     instance_type = "t2.micro"
     user_data = file("cloud-init/base.yml")
     subnet_id = aws_subnet.etcd-sub-3.id
