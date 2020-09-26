@@ -1,6 +1,5 @@
 # This is the configuration file for the etcd server.
 # Sourced from here: https://github.com/etcd-io/etcd/blob/release-3.4/etcd.conf.yml.sample
-
 # Human-readable name for this member.
 name: {{ inventory_hostname }}
 
@@ -56,19 +55,19 @@ initial-advertise-peer-urls: {{ etcdPeerUrls }}
 advertise-client-urls: {{ etcdClientUrls }}
 
 # Discovery URL used to bootstrap the cluster.
-discovery: {{ etcdDiscoveryUrl }}
+# discovery: {{ etcdDiscoveryUrl }}
 
 # Valid values include 'exit', 'proxy'
-discovery-fallback: 'proxy'
+#discovery-fallback: 'proxy'
 
 # HTTP proxy to use for traffic to discovery service.
-discovery-proxy:
+#discovery-proxy:
 
 # DNS domain used to bootstrap initial cluster.
-discovery-srv:
+#discovery-srv:
 
 # Initial cluster configuration for bootstrapping.
-initial-cluster:
+initial-cluster: {{etcdNode1}}={{etcdMode}}://{{ hostvars[etcdNode1]['default_ipv4']['address'] }}:{{etcdPeerPort}},{{etcdNode2}}={{etcdMode}}://{{ hostvars[etcdNode2]['default_ipv4']['address'] }}:{{etcdPeerPort}},{{etcdNode3}}={{etcdMode}}://{{ hostvars[etcdNode3]['default_ipv4']['address'] }}:{{etcdPeerPort}}
 
 # Initial cluster token for the etcd cluster during bootstrap.
 initial-cluster-token: 'etcd-cluster'
