@@ -53,7 +53,7 @@ initial-advertise-peer-urls: {{ etcdMode}}://{{ ansible_facts['default_ipv4']['a
 # List of this member's client URLs to advertise to the public.
 # The URLs needed to be a comma-separated list.
 # advertise-client-urls: http://localhost:2379
-advertise-client-urls: {{ etcdMode}}://{{ ansible_facts['default_ipv4']['address'] }}:{{ etcdClientPort}}
+advertise-client-urls: {{ etcdMode}}://{{ ansible_facts['default_ipv4']['address'] }}:{{ etcdClientPort}},{{etcdMode}}://localhost:{{etcdClientPort}}
 
 # Discovery URL used to bootstrap the cluster.
 # discovery: {{ etcdDiscoveryUrl }}
