@@ -2,9 +2,9 @@
 # Sourced from here: https://github.com/etcd-io/etcd/blob/release-3.4/etcd.conf.yml.sample
 # Human-readable name for this member.
 
-{%- set etcdNodeUrl1 = "{{etcdMode}}://{{ hostvars[etcdNode1]['ansible_facts']['default_ipv4']['address']}}:{{etcdPeerPort}}"-%}
-{%- set etcdNodeUrl2 = "{{etcdMode}}://{{ hostvars[etcdNode2]['ansible_facts']['default_ipv4']['address']}}:{{etcdPeerPort}}"-%}
-{%- set etcdNodeUrl3 = "{{etcdMode}}://{{ hostvars[etcdNode3]['ansible_facts']['default_ipv4']['address']}}:{{etcdPeerPort}}"-%}
+{%- set etcdNodeUrl1 = {{etcdMode}}://{{ hostvars[etcdNode1]['ansible_facts']['default_ipv4']['address']}}:{{etcdPeerPort}}-%}
+{%- set etcdNodeUrl2 = {{etcdMode}}://{{ hostvars[etcdNode2]['ansible_facts']['default_ipv4']['address']}}:{{etcdPeerPort}}-%}
+{%- set etcdNodeUrl3 = {{etcdMode}}://{{ hostvars[etcdNode3]['ansible_facts']['default_ipv4']['address']}}:{{etcdPeerPort}}-%}
 
 name: {{ inventory_hostname }}
 
