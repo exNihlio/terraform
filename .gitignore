@@ -1,5 +1,7 @@
 .terraform
 terraform.tfstate
 terraform.tfstate.backup
+*.rpm
+*.dpkg
 *.swp
 base.yml
