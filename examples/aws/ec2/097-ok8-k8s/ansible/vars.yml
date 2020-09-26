@@ -8,9 +8,9 @@ hostsFile: |
   okd-node-2.okd.dev
   okd-node-3.okd.dev
 # This exists to make the code bit more readable
-etcdNode1: okd-node-1.okd.dev
-etcdNode2: okd-node-2.okd.dev
-etcdNode3: okd-node-3.okd.dev
+etcdNode1: etcd-node-1.okd.dev
+etcdNode2: etcd-node-2.okd.dev
+etcdNode3: etcd-node-3.okd.dev
 # This path is based on the configuration directory determined from the RPM
 # built here: https://github.com/exNihlio/terraform
 etcdConfDir: /etc/etcd.d/
