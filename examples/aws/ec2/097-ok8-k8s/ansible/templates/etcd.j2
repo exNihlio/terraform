@@ -67,7 +67,7 @@ advertise-client-urls: {{ etcdClientUrls }}
 #discovery-srv:
 
 # Initial cluster configuration for bootstrapping.
-initial-cluster: {{etcdNode1}}={{etcdMode}}://{{ hostvars[etcdNode1]['default_ipv4']['address'] }}:{{etcdPeerPort}},{{etcdNode2}}={{etcdMode}}://{{ hostvars[etcdNode2]['default_ipv4']['address'] }}:{{etcdPeerPort}},{{etcdNode3}}={{etcdMode}}://{{ hostvars[etcdNode3]['default_ipv4']['address'] }}:{{etcdPeerPort}}
+initial-cluster: {{etcdNode1}}={{etcdMode}}://{{ hostvars[etcdNode1]['ansible_default_ipv4']['address'] }}:{{etcdPeerPort}},{{etcdNode2}}={{etcdMode}}://{{ hostvars[etcdNode2]['ansible_default_ipv4']['address'] }}:{{etcdPeerPort}},{{etcdNode3}}={{etcdMode}}://{{ hostvars[etcdNode3]['ansible_default_ipv4']['address'] }}:{{etcdPeerPort}}
 
 # Initial cluster token for the etcd cluster during bootstrap.
 initial-cluster-token: 'etcd-cluster'
