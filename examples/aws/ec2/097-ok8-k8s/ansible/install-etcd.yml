@@ -16,6 +16,25 @@
       yum:
         name: "/tmp/{{ etcdRPM }}"
         state: present
+      notify:
+        - restart-etcd
+
+    - name: Sync the etcd.conf template
+      template:
+        src: templates/etcd.j2
+        dest: "{{ etcdConfDir }}/etcd.conf"
+        state: present
+        owner: etcd
+        group: root
+        mode: 0644
+      notify:
+        - restart-etcd
+
+    - name: Ensure that etcd is started
+      systemd:
+        name: etcd
+        state: started
+        enabled: True
   #   - name: Untar etcd
 
   #   - name: Create etcd service file
@@ -28,12 +47,11 @@
 
   #   - name: Ensure etcd is running
 
-  # handlers:
-  #   - name: Restart etcd
-  #     systemd:
-  #       name: etcd
-  #       state: restarted
-  #       daemon_reload: True
-  #       enabled: True
-  #     listen:
-  #       - restart-etcd
+  handlers:
+    - name: Restart etcd
+      systemd:
+        name: etcd
+        state: restarted
+        enabled: True
+      listen:
+        - restart-etcd

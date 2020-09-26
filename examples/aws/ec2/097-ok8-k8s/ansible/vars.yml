@@ -7,6 +7,16 @@ hostsFile: |
   okd-node-1.okd.dev
   okd-node-2.okd.dev
   okd-node-3.okd.dev
+# This path is based on the configuration directory determined from the RPM
+# built here: https://github.com/exNihlio/terraform
+etcdConfDir: /etc/etcd.d/
+etcdDataDir: "/var/lib/etcd"
+etcdClientPort: 2379
+etcdPeerPort: 2380
+etcdMode: "http"
 etcdPath: etcd
+etcdPeerUrl: "{{ etcdMode://etcd-node-1.okd.dev:etcdPeerPort, etcdMode://etcd-node-2.okd.dev:etcdPeerPort,etcdMode://etcd-node-3.okd.dev:etcdPeerPort }}"
+etcdClientUrls: "{{ etcdMode://etcd-node-1.okd.dev:etcdClientPort, etcdMode://etcd-node-2.okd.dev:etcdClientPort,etcdMode://etcd-node-3.okd.dev:etcdClientrPort }}"
+etcdDiscoveryUrl: "{{ etcdMode://etcd-node-1.okd.dev:etcdPeerPort }}"
 etcdVer: "v3.4.13-1"
 etcdRPM: "etcd-{{ etcdVer }}.x86_64.rpm"
