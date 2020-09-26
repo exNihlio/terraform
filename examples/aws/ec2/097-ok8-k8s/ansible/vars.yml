@@ -7,13 +7,6 @@ hostsFile: |
   okd-node-1.okd.dev
   okd-node-2.okd.dev
   okd-node-3.okd.dev
-etcdVersion: v3.4.13
-etcdURL: "https://github.com/etcd-io/etcd/releases/download/"
-etcdPlatform: "linux"
-osArch: "amd64"
-etcdArchive:
-  darwin: "zip"
-  windows: "zip"
-  linux: "tar.gz"
-etcdFile: etcd-{{etcdVersion}}-{{etcdPlatform}}-{{osArch}}.{{etcdArchive[etcdPlatform]}}
-etcdDownloadURL: "{{etcdURL}}/{{etcdVersion}}/{{etcdFile}}"
+etcdPath: etcd
+etcdVer: "v3.4.13"
+etcdRPM: "etcd-{{ etcdVer }}.x86_64.rpm"

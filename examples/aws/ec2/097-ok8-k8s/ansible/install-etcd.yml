@@ -4,12 +4,18 @@
   vars_files:
     - vars.yml
   tasks:
-    - name: Download etcd archive
-      get_url:
-        url: "{{ etcdDownloadURL }}"
-        dest: /tmp/"{{ etcdFile }}"
-        state:
+    - name: Sync the etcd rpm
+      copy:
+        src: "{{ etcdPath }}/{{ etcdRPM }}"
+        dest: /tmp/
+        owner: root
+        group: root
+        mode: 0644
 
+    - name: Install etcd
+      yum:
+        name: "/tmp/{{ etcdRPM }}"
+        state: present
   #   - name: Untar etcd
 
   #   - name: Create etcd service file
