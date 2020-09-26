@@ -48,12 +48,12 @@ cors:
 # List of this member's peer URLs to advertise to the rest of the cluster.
 # The URLs needed to be a comma-separated list.
 # initial-advertise-peer-urls: http://localhost:2380
-#initial-advertise-peer-urls: {{etcdMode}}://{{ hostvars[etcdNode1]['ansible_facts']['default_ipv4']['address']}}:{{etcdPeerPort}},{{etcdMode}}://{{ hostvars[etcdNode2]['ansible_facts']['default_ipv4']['address']}}:{{etcdPeerPort}},{{etcdMode}}://{{ hostvars[etcdNode3]['ansible_facts']['default_ipv4']['address']}}:{{etcdPeerPort}}
+initial-advertise-peer-urls: {{ etcdMode}}://{{ ansible_facts['default_ipv4']['address']] }}:{{ etcdPeerPort}}
 
 # List of this member's client URLs to advertise to the public.
 # The URLs needed to be a comma-separated list.
 # advertise-client-urls: http://localhost:2379
-advertise-client-urls: {{ etcdClientUrls }}
+advertise-client-urls: {{ etcdMode}}://{{ ansible_facts['default_ipv4']['address']] }}:{{ etcdClientPort}}
 
 # Discovery URL used to bootstrap the cluster.
 # discovery: {{ etcdDiscoveryUrl }}
