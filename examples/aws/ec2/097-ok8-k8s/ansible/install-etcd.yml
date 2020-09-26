@@ -23,7 +23,6 @@
       template:
         src: templates/etcd.j2
         dest: "{{ etcdConfDir }}/etcd.conf"
-        state: present
         owner: etcd
         group: root
         mode: 0644
