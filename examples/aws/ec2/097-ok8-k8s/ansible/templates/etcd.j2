@@ -26,13 +26,15 @@ quota-backend-bytes: 0
 
 # List of comma separated URLs to listen on for peer traffic.
 # By default, we listen on localhost
+# The etcd docs keep using the term 'URL' here. They mean IP address. 
 #listen-peer-urls: http://localhost:2380
-listen-peer-urls: {{ etcdMode}}://{{ inventory_hostname }}:{{ etcdPeerPort }}
+listen-peer-urls: {{ etcdMode}}://{{ ansible_facts['default_ipv4']['address'] }}:{{ etcdPeerPort }}
 
 # List of comma separated URLs to listen on for client traffic.
 # By default, we listen on localhost
+# The etcd docs keep using the term 'URL' here. They mean IP address. 
 #listen-client-urls: http://localhost:2379
-listen-client-urls: {{ etcdMode }}://{{ inventory_hostname }}:{{ etcdClientPort }}
+listen-client-urls: {{ etcdMode }}://{{ ansible_facts['default_ipv4']['address'] }}:{{ etcdClientPort }}
 
 # Maximum number of snapshot files to retain (0 is unlimited).
 max-snapshots: 5
