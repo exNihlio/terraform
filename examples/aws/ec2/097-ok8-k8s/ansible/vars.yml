@@ -15,7 +15,7 @@ etcdClientPort: 2379
 etcdPeerPort: 2380
 etcdMode: "http"
 etcdPath: etcd
-etcdPeerUrl: "{{etcdMode}}://etcd-node-1.okd.dev:{{etcdPeerPort}},{{etcdMode}}://etcd-node-2.okd.dev:{{etcdPeerPort}},{{etcdMode}}://etcd-node-3.okd.dev:{{etcdPeerPort}}"
+etcdPeerUrls: "{{etcdMode}}://etcd-node-1.okd.dev:{{etcdPeerPort}},{{etcdMode}}://etcd-node-2.okd.dev:{{etcdPeerPort}},{{etcdMode}}://etcd-node-3.okd.dev:{{etcdPeerPort}}"
 etcdClientUrls: "{{etcdMode}}://etcd-node-1.okd.dev:{{etcdClientPort}},{{etcdMode}}://etcd-node-2.okd.dev:{{etcdClientPort}},{{etcdMode}}://etcd-node-3.okd.dev:{{etcdClientPort}}"
 etcdDiscoveryUrl: "{{etcdMode}}://etcd-node-1.okd.dev:{{etcdPeerPort}}"
 etcdVer: "v3.4.13-1"
