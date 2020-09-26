@@ -4,6 +4,10 @@
   vars_files:
     - vars.yml
   tasks:
+    - name: Set the hostnames:
+      hostname:
+        use: systemd
+        name: "{{ inventory_hostname }}"
     - name: Sync the etcd rpm
       copy:
         src: "{{ etcdPath }}/{{ etcdRPM }}"
