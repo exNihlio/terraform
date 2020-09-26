@@ -8,5 +8,5 @@ hostsFile: |
   okd-node-2.okd.dev
   okd-node-3.okd.dev
 etcdPath: etcd
-etcdVer: "v3.4.13"
+etcdVer: "v3.4.13-1"
 etcdRPM: "etcd-{{ etcdVer }}.x86_64.rpm"
