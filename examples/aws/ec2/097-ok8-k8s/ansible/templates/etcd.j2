@@ -2,9 +2,9 @@
 # Sourced from here: https://github.com/etcd-io/etcd/blob/release-3.4/etcd.conf.yml.sample
 # Human-readable name for this member.
 
-{%- set etcdDiscoveryUrl1 = {{etcdMode}}://{{ hostvars[etcdNode1]['ansible_facts']['default_ipv4']['address']}}:{{etcdPeerPort}} -%}
-{%- set etcdDiscoveryUrl2 = {{etcdMode}}://{{ hostvars[etcdNode2]['ansible_facts']['default_ipv4']['address'] }}:{{etcdPeerPort}} -%}
-{%- set etcdDiscoveryUrl3 = {{etcdMode}}://{{ hostvars[etcdNode3]['ansible_facts']['default_ipv4']['address'] }}:{{etcdPeerPort}}-%}
+{%- set etcdNodeUrl1 = "{{etcdMode}}://{{ hostvars[etcdNode1]['ansible_facts']['default_ipv4']['address']}}:{{etcdPeerPort}}"-%}
+{%- set etcdNodeUrl2 = "{{etcdMode}}://{{ hostvars[etcdNode2]['ansible_facts']['default_ipv4']['address']}}:{{etcdPeerPort}}"-%}
+{%- set etcdNodeUrl3 = "{{etcdMode}}://{{ hostvars[etcdNode3]['ansible_facts']['default_ipv4']['address']}}:{{etcdPeerPort}}"-%}
 
 name: {{ inventory_hostname }}
 
@@ -72,7 +72,7 @@ advertise-client-urls: {{ etcdClientUrls }}
 #discovery-srv:
 
 # Initial cluster configuration for bootstrapping.
-initial-cluster: {{etcdNode1}}={{etcdMode}}://{{ hostvars[etcdNode1]['ansible_facts']['default_ipv4']['address'] }}:{{etcdPeerPort}},{{etcdNode2}}={{etcdMode}}://{{ hostvars[etcdNode2]['ansible_facts']['default_ipv4']['address'] }}:{{etcdPeerPort}},{{etcdNode3}}={{etcdMode}}://{{ hostvars[etcdNode3]['ansible_facts']['default_ipv4']['address'] }}:{{etcdPeerPort}}
+initial-cluster: {{etcdNode1}}={{etcdNodeUrl1}},{{etcdNode2}}={{etcdNodeUrl2}},{{etcdNode3}}={{etcdNodeUrl3}}
 
 # Initial cluster token for the etcd cluster during bootstrap.
 initial-cluster-token: 'etcd-cluster'
