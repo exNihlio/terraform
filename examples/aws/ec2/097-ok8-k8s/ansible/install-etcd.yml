@@ -144,7 +144,7 @@
     - name: Distribute the root ca cert
       copy:
         src: files/ca.crt
-        dest: /etc/pki/ca-trust/source/anchors/
+        dest: /etc/pki/tls/certs/ca.crt
         owner: root
         group: root
         mode: 0644
