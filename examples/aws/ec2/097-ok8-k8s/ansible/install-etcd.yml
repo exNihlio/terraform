@@ -143,7 +143,7 @@
 
     - name: Distribute the root ca cert
       copy:
-        source: files/ca.crt
+        src: files/ca.crt
         dest: /etc/pki/ca-trust/source/anchors/
         owner: root
         group: root
@@ -155,7 +155,7 @@
 
     - name: Distribute the *.okd.dev crt
       copy:
-        source: files/{{wildcardCrtName}}.crt
+        src: files/{{wildcardCrtName}}.crt
         dest: /etc/pki/tls/certs
         owner: etcd
         group: root
@@ -167,7 +167,7 @@
 
     - name: Distribute the *.okd.dev key
       copy:
-        source: files/{{wildcardKeyName}}.key
+        src: files/{{wildcardKeyName}}.key
         dest: /etc/pki/tls/private/
         owner: etcd
         group: root
