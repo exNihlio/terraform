@@ -104,6 +104,7 @@
         path: files/{{wildcardKeyName}}.key
         type: RSA
         size: 4096
+      when: enableTLS == true
       notify:
         - update-ca-trust
         - restart-etcd
@@ -119,7 +120,7 @@
         country_name: "{{countryName}}"
         organization_name: "{{organizationName}}"
         common_name: "{{wildcardCommonName}}"
-      when: enableTLS is true
+      when: enableTLS == true
       notify:
         - update-ca-trust
         - restart-etcd
@@ -134,7 +135,7 @@
         ownca_path: files/ca.crt
         ownca_privatekey_path: files/ca.key
         provider: ownca
-      when: enableTLS is true
+      when: enableTLS == true
       notify:
         - update-ca-trust
         - restart-etcd
