@@ -67,11 +67,11 @@
       delegate_to: localhost
       run_once: True
 
-    - name: Create the CA cert
+    - name: Create the CA csr
       openssl_csr:
         path: files/ca.csr
         privatekey_path: files/ca.key
-        provider: selfsigned
+        # provider: selfsigned
         email_address: "{{ emailAddress }}"
         country_name: "{{ countryName }}"
         organization_name: "{{ organizationName }}"
