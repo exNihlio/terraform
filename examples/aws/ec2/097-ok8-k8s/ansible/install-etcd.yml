@@ -164,6 +164,17 @@
       notify:
         - update-ca-trust
         - restart-etcd
+    # Default key permissions make this impossible to load on the server
+    - name: Make the wildcar key copiable
+      file:
+        path: files/{{wildcardKeyName}}.key
+        state: file
+        owner: root
+        group: root
+        mode: 0644
+      when: enableTLS == true
+      delegate_to: localhost
+      run_once: True
 
     - name: Distribute the *.okd.dev key
       copy:
@@ -176,6 +187,17 @@
       notify:
         - update-ca-trust
         - restart-etcd
+    # Set the key permissions back
+    - name: Make the wildcar key protected
+      file:
+        path: files/{{wildcardKeyName}}.key
+        state: file
+        owner: root
+        group: root
+        mode: 0600
+      when: enableTLS == true
+      delegate_to: localhost
+      run_once: True
     
     - name: Ensure that etcd is started
       systemd:
