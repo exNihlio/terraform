@@ -27,6 +27,8 @@ etcdVer: "v3.4.13-1"
 etcdRPM: "etcd-{{ etcdVer }}.x86_64.rpm"
 ## Enable TLS for etcd
 enableTLS: true
+enablePeerTLS: true
+enableClientTLS: false
 etcdWildCard: "*.okd.dev"
 ## CSR Data
 emailAddress: "example@example.com"

@@ -117,7 +117,7 @@ client-transport-security:
   # Path to the client server TLS trusted CA cert file.
   #trusted-ca-file: /etc/pki/tls/certs/ca.crt
   # Client TLS using generated certificates
-{% if enableTLS == true -%}
+{% if enableClientTLS == true -%}
   auto-tls: true
 {% else %}
   auto-tls: false
@@ -136,11 +136,11 @@ peer-transport-security:
   # Path to the peer server TLS trusted CA cert file.
   #trusted-ca-file: /etc/pki/tls/certs/ca.crt
   # Peer TLS using generated certificates.
-  {% if enableTLS == true -%}
+{% if enablePeerTLS == true -%}
   auto-tls: true
-  {% else %}
+{% else %}
   auto-tls: false
-  {% endif -%}
+{% endif -%}
 
 # Enable debug-level logging for etcd.
 debug: false
