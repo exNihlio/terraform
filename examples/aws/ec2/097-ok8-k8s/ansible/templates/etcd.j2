@@ -72,7 +72,7 @@ discovery-srv: {{etcdDiscoverySRV}}
 
 # Initial cluster configuration for bootstrapping.
 #initial-cluster: {{etcdNode1}}={{etcdMode}}://{{ hostvars[etcdNode1]['ansible_facts']['default_ipv4']['address']}}:{{etcdPeerPort}},{{etcdNode2}}={{etcdMode}}://{{ hostvars[etcdNode2]['ansible_facts']['default_ipv4']['address']}}:{{etcdPeerPort}},{{etcdNode3}}={{etcdMode}}://{{ hostvars[etcdNode3]['ansible_facts']['default_ipv4']['address']}}:{{etcdPeerPort}}
-initial-cluster: {{etcdNode1}}={{etcdMode}}://etcd-node-1.okd.dev:{{etcdPeerPort}},{{etcdNode2}}={{etcdMode}}://etcd-node-2.okd.dev:{{etcdPeerPort}},{{etcdNode3}}={{etcdMode}}://etcd-node-3.okd.dev:{{etcdPeerPort}}
+# initial-cluster: {{etcdNode1}}={{etcdMode}}://etcd-node-1.okd.dev:{{etcdPeerPort}},{{etcdNode2}}={{etcdMode}}://etcd-node-2.okd.dev:{{etcdPeerPort}},{{etcdNode3}}={{etcdMode}}://etcd-node-3.okd.dev:{{etcdPeerPort}}
 # Initial cluster token for the etcd cluster during bootstrap.
 initial-cluster-token: 'etcd-cluster'
 
