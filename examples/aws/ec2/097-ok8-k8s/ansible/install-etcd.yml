@@ -148,7 +148,7 @@
         owner: root
         group: root
         mode: 0644
-      when: enableTLS is true
+      when: enableTLS == true
       notify:
         - update-ca-trust
         - restart-etcd
@@ -160,7 +160,7 @@
         owner: etcd
         group: root
         mode: 0644
-      when: enableTLS is true
+      when: enableTLS == true
       notify:
         - update-ca-trust
         - restart-etcd
@@ -172,7 +172,7 @@
         owner: etcd
         group: root
         mode: 0600
-      when: enableTLS is true
+      when: enableTLS == true
       notify:
         - update-ca-trust
         - restart-etcd
