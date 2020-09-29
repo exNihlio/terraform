@@ -56,7 +56,7 @@
         path: files/ca.key
         type: RSA
         size: 4096
-      when: enableTLS is true
+      when: "{{ enableTLS }}" is true
       notify:
         - update-ca-trust
         - restart-etcd
@@ -71,7 +71,7 @@
         country_name: "{{ countryName }}"
         organization_name: "{{ organizationName }}"
         common_name: "{{ commonName }}"
-      when: enableTLS is true
+      when: "{{ enableTLS }}" is true
       notify:
         - update-ca-trust
         - restart-etcd
@@ -83,7 +83,7 @@
         privatekey_path: files/ca.key
         csr_path: files/ca.csr
         provider: selfsigned
-      when: enableTLS is true
+      when: "{{ enableTLS }}" is true
       notify:
         - update-ca-trust
         - restart-etcd
