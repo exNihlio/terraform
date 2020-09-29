@@ -1,0 +1,186 @@
+- hosts: etcd
+  gather_facts: yes
+  become: yes
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Ensure that the Python cryptography backend is installed
+      yum:
+        name: python3-cryptography
+        state: present
+        delegate_to: localhost
+      run_once: True
+      
+    - name: Ensure 'files' exists
+      file:
+        state: directory
+        path: files
+        mode: 0755
+        owner: root
+        group: root
+      when: enableTLS == true
+      delegate_to: localhost
+      run_once: True
+
+    - name: Create the root CA key
+      openssl_privatekey:
+        path: files/ca.key
+        type: RSA
+        size: 4096
+        when: enableTLS == true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+      delegate_to: localhost
+      run_once: True
+
+    - name: Create the CA csr
+      openssl_csr:
+        path: files/ca.csr
+        privatekey_path: files/ca.key
+        # provider: selfsigned
+        email_address: "{{emailAddress}}"
+        country_name: "{{countryName}}"
+        organization_name: "{{organizationName}}"
+        common_name: "{{commonName}}"
+        when: enableTLS == true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+      delegate_to: localhost
+      run_once: True
+
+    - name: Create the CA cert
+      openssl_certificate:
+        path: files/ca.crt
+        privatekey_path: files/ca.key
+        csr_path: files/ca.csr
+        provider: selfsigned
+        when: enableTLS == true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+      delegate_to: localhost
+      run_once: True
+
+    - name: Create the *.okd.dev wildcard key
+      openssl_privatekey:
+        path: files/{{wildcardKeyName}}.key
+        type: RSA
+        size: 4096
+        when: enableTLS == true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+      delegate_to: localhost
+      run_once: True
+
+    - name: Create the *.okd.dev wildcard csr
+      openssl_csr:
+        path: files/{{wildcardCsrName}}.csr
+        privatekey_path: files/{{wildcardKeyName}}.key
+        # provider: selfsigned
+        email_address: "{{emailAddress}}"
+        country_name: "{{countryName}}"
+        organization_name: "{{organizationName}}"
+        common_name: "{{wildcardCommonName}}"
+        subject_alt_name: 
+            - "IP:{{hostvars[etcdNode1]['ansible_facts']['default_ipv4']['address']}}"
+            - "IP:{{hostvars[etcdNode2]['ansible_facts']['default_ipv4']['address']}}"
+            - "IP:{{hostvars[etcdNode3]['ansible_facts']['default_ipv4']['address']}}"
+            - "DNS:*.okd.dev"
+        when: enableTLS == true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+      delegate_to: localhost
+      run_once: True
+
+    - name: Create the *.okd.dev wildcard crt
+      openssl_certificate:
+        path: files/{{wildcardCrtName}}.crt
+        privatekey_path: files/{{wildcardKeyName}}.key
+        csr_path: files/{{wildcardCsrName}}.csr
+        ownca_path: files/ca.crt
+        ownca_privatekey_path: files/ca.key
+        provider: ownca
+        when: enableTLS == true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+      delegate_to: localhost
+      run_once: True
+
+    - name: Distribute the root ca cert
+      copy:
+        src: files/ca.crt
+        dest: /etc/pki/tls/certs/ca.crt
+        owner: root
+        group: root
+        mode: 0644
+      when: enableTLS == true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+    - name: Distribute the root ca again
+      copy:
+        src: files/ca.crt
+        dest: /etc/pki/ca-trust/source/anchors/
+        owner: root
+        group: root
+        mode: 0644
+      when: enableTLS == true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+
+    - name: Distribute the *.okd.dev crt
+      copy:
+        src: files/{{wildcardCrtName}}.crt
+        dest: /etc/pki/tls/certs
+        owner: etcd
+        group: root
+        mode: 0644
+      when: enableTLS == true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+    # Default key permissions make this impossible to load on the server
+    - name: Make the wildcar key copiable
+      file:
+        path: files/{{wildcardKeyName}}.key
+        state: file
+        owner: root
+        group: root
+        mode: 0644
+      when: enableTLS == true
+      delegate_to: localhost
+      run_once: True
+
+    - name: Distribute the *.okd.dev key
+      copy:
+        src: files/{{wildcardKeyName}}.key
+        dest: /etc/pki/tls/private/
+        owner: etcd
+        group: root
+        mode: 0600
+      when: enableTLS == true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+    # Set the key permissions back
+    - name: Make the wildcar key protected
+      file:
+        path: files/{{wildcardKeyName}}.key
+        state: file
+        owner: root
+        group: root
+        mode: 0600
+      when: enableTLS == true
+      delegate_to: localhost
+      run_once: True
+  handlers:
+    - name: Update CA trust
+      command: update-ca-trust
+      listen:
+        - update-ca-trust
