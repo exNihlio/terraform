@@ -37,12 +37,19 @@
       yum:
         name: python3-cryptography
         state: present
+      delegate_to: localhost
       
     - name: Ensure that etcd is started
       systemd:
         name: etcd
         state: started
         enabled: True
+
+    - name: Ensure that the Python cryptography backend is installed
+      yum:
+        name: python3-cryptography
+        state: present
+      delegate_to: localhost
 
     - name: Create the root CA key
       openssl_privatekey:
