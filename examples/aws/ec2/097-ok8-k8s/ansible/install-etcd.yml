@@ -120,9 +120,9 @@
         organization_name: "{{organizationName}}"
         common_name: "{{wildcardCommonName}}"
         subject_alt_name: 
-          - hostvars[etcdNode1]['ansible_facts']['default_ipv4']['address']
-          - hostvars[etcdNode2]['ansible_facts']['default_ipv4']['address']
-          - hostvars[etcdNode3]['ansible_facts']['default_ipv4']['address']
+          - "{{hostvars[etcdNode1]['ansible_facts']['default_ipv4']['address']}}"
+          - "{{hostvars[etcdNode2]['ansible_facts']['default_ipv4']['address']}}"
+          - "{{hostvars[etcdNode3]['ansible_facts']['default_ipv4']['address']}}"
       when: enableTLS == true
       notify:
         - update-ca-trust
