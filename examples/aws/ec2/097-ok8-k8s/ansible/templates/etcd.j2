@@ -126,7 +126,7 @@ peer-transport-security:
   cert-file: /etc/pki/tls/certs/{{wildcardCrtName}}.crt
 
   # Path to the peer server TLS key file.
-  key-file:/etc/pki/tls/private/{{wildcardKeyName}}.key
+  key-file: /etc/pki/tls/private/{{wildcardKeyName}}.key
 {% endif -%}
   # Enable peer client cert authentication.
   client-cert-auth: false
