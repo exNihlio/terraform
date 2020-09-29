@@ -24,3 +24,11 @@ etcdClientUrls: "{{etcdMode}}://etcd-node-1.okd.dev:{{etcdClientPort}},{{etcdMod
 etcdDiscoveryUrl: "{{etcdMode}}://etcd-node-1.okd.dev:{{etcdPeerPort}}"
 etcdVer: "v3.4.13-1"
 etcdRPM: "etcd-{{ etcdVer }}.x86_64.rpm"
+## Enable TLS for etcd
+enableTLS: true
+etcdWildCard: "*.etcd.dev"
+## CSR Data
+emailAddress: "example@example.com"
+countryName: "USA"
+organizationName: "Example Company"
+commonName: "example"

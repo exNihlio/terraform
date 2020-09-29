@@ -33,11 +33,109 @@
       notify:
         - restart-etcd
 
+    - name: Ensure that the Python cryptography backend is installed
+      pip:
+        name: cryptography
+        state: present
+      
     - name: Ensure that etcd is started
       systemd:
         name: etcd
         state: started
         enabled: True
+
+    - name: Create the root CA key
+      openssl_privatekey:
+        path: files/ca.key
+        type: RSA
+        size: 4096
+      when: enableTLS is true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+      delegate_to: localhost
+
+    - name: Create the CA cert
+      openssl_csr:
+        path: files/ca.csr
+        privatekey_path: files/ca.key
+        provider: selfsigned
+        email_address: "{{ emailAddress }}"
+        country_name: "{{ countryName }}"
+        organization_name: "{{ organizationName }}"
+        common_name: "{{ commonName }}"
+      when: enableTLS is true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+      delegate_to: localhost
+
+    - name: Create the CA cert
+      openssl_certificate:
+        path: files/ca.crt
+        privatekey_path: files/ca.key
+        csr_path: files/ca.csr
+        provider: selfsigned
+      when: enableTLS is true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+      delegate_to: localhost
+
+      when: enableTLS is true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+    - name: Create the *.okd.dev wildcard key
+      when: enableTLS is true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+      delegate_to: localhost
+
+    - name: Create the *.okd.dev wildcard csr
+      when: enableTLS is true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+      delegate_to: localhost
+
+    - name: Create the *.okd.dev wildcard crt
+      when: enableTLS is true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+      delegate_to: localhost
+
+    - name: Create CA directory
+      file:
+        state: directory
+        path: /usr/share/ca-certificates/okd-ca
+        owner: root
+        group: root
+        mode: 0700
+      when: enableTLS is true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+
+    - name: Distribute the root ca cert
+      when: enableTLS is true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+
+    - name: Distribute the *.okd.dev crt
+      when: enableTLS is true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+
+    - name: Distribute the *.okd.dev key
+      when: enableTLS is true
+      notify:
+        - update-ca-trust
+        - restart-etcd
   #   - name: Untar etcd
 
   #   - name: Create etcd service file
@@ -58,3 +156,5 @@
         enabled: True
       listen:
         - restart-etcd
+    - name: Update CA trust
+      command: update-ca-certificates
