@@ -29,6 +29,6 @@ enableTLS: true
 etcdWildCard: "*.etcd.dev"
 ## CSR Data
 emailAddress: "example@example.com"
-countryName: "USA"
+countryName: "US"
 organizationName: "Example Company"
 commonName: "example"
