@@ -141,46 +141,47 @@
       delegate_to: localhost
       run_once: True
 
-  #   - name: Create CA directory
-  #     file:
-  #       state: directory
-  #       path: /usr/share/ca-certificates/okd-ca
-  #       owner: root
-  #       group: root
-  #       mode: 0700
-  #     when: enableTLS is true
-  #     notify:
-  #       - update-ca-trust
-  #       - restart-etcd
+    - name: Distribute the root ca cert
+      copy:
+        source: files/ca.crt
+        dest: /etc/pki/ca-trust/source/anchors/
+        owner: root
+        group: root
+        mode: 0644
+      when: enableTLS is true
+      notify:
+        - update-ca-trust
+        - restart-etcd
 
-  #   - name: Distribute the root ca cert
-  #     when: enableTLS is true
-  #     notify:
-  #       - update-ca-trust
-  #       - restart-etcd
+    - name: Distribute the *.okd.dev crt
+      copy:
+        source: files/{{wildcardCrtName}}.crt
+        dest: /etc/pki/tls/certs
+        owner: etcd
+        group: root
+        mode: 0644
+      when: enableTLS is true
+      notify:
+        - update-ca-trust
+        - restart-etcd
 
-  #   - name: Distribute the *.okd.dev crt
-  #     when: enableTLS is true
-  #     notify:
-  #       - update-ca-trust
-  #       - restart-etcd
-
-  #   - name: Distribute the *.okd.dev key
-  #     when: enableTLS is true
-  #     notify:
-  #       - update-ca-trust
-  #       - restart-etcd
-  # #   - name: Untar etcd
-
-  # #   - name: Create etcd service file
-
-  # #   - name: Copy etcd certificate
-
-  # #   - name: Copy etcd key
-
-  # #   - name: Copy etcd ca-cert.crt
-
-  # #   - name: Ensure etcd is running
+    - name: Distribute the *.okd.dev key
+      copy:
+        source: files/{{wildcardKeyName}}.key
+        dest: /etc/pki/tls/private/
+        owner: etcd
+        group: root
+        mode: 0600
+      when: enableTLS is true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+    
+    - name: Ensure that etcd is started
+      systemd:
+        name: etcd
+        state: started
+        enabled: True
 
   handlers:
     - name: Restart etcd
@@ -192,6 +193,6 @@
         - restart-etcd
 
     - name: Update CA trust
-      command: update-ca-certificates
+      command: update-ca-trust
       listen:
         - update-ca-trust
