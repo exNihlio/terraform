@@ -33,11 +33,11 @@
       notify:
         - restart-etcd
       
-    - name: Ensure that etcd is started
-      systemd:
-        name: etcd
-        state: started
-        enabled: True
+    # - name: Ensure that etcd is started
+    #   systemd:
+    #     name: etcd
+    #     state: started
+    #     enabled: True
 
     - name: Ensure that the Python cryptography backend is installed
       yum:
