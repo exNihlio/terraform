@@ -156,6 +156,17 @@
       notify:
         - update-ca-trust
         - restart-etcd
+    - name: Distribute the root ca again
+      copy:
+        src: files/ca.crt
+        dest: /etc/pki/ca-trust/source/anchors/
+        owner: root
+        group: root
+        mode: 0644
+      when: enableTLS == true
+      notify:
+        - update-ca-trust
+        - restart-etcd
 
     - name: Distribute the *.okd.dev crt
       copy:
