@@ -167,5 +167,5 @@
       listen:
         - restart-etcd
 
-  #   - name: Update CA trust
-  #     command: update-ca-certificates
+    - name: Update CA trust
+      command: update-ca-certificates
