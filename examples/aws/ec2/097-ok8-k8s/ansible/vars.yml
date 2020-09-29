@@ -17,7 +17,7 @@ etcdConfDir: /etc/etcd.d/
 etcdDataDir: "/var/lib/etcd"
 etcdClientPort: 2379
 etcdPeerPort: 2380
-etcdPeerrMode: "https"
+etcdPeerMode: "https"
 etcdClientMode: "http"
 etcdPath: etcd
 etcdPeerUrls: "{{etcdPeerMode}}://etcd-node-1.okd.dev:{{etcdPeerPort}},{{etcdMode}}://etcd-node-2.okd.dev:{{etcdPeerPort}},{{etcdPeerMode}}://etcd-node-3.okd.dev:{{etcdPeerPort}}"
