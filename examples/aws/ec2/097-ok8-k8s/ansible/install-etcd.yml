@@ -169,3 +169,5 @@
 
     - name: Update CA trust
       command: update-ca-certificates
+      listen:
+        - update-ca-trust
