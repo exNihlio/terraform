@@ -144,14 +144,14 @@
 
   # #   - name: Ensure etcd is running
 
-  # handlers:
-  #   - name: Restart etcd
-  #     systemd:
-  #       name: etcd
-  #       state: restarted
-  #       enabled: True
-  #     listen:
-  #       - restart-etcd
+  handlers:
+    - name: Restart etcd
+      systemd:
+        name: etcd
+        state: restarted
+        enabled: True
+      listen:
+        - restart-etcd
 
   #   - name: Update CA trust
   #     command: update-ca-certificates
