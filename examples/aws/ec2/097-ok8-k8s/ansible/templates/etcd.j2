@@ -57,7 +57,7 @@ initial-advertise-peer-urls: {{etcdMode}}://{{inventory_hostname}}:{{etcdPeerPor
 #advertise-client-urls: {{etcdMode}}://{{ ansible_facts['default_ipv4']['address']}}:{{etcdClientPort}}
 advertise-client-urls: {{etcdMode}}://{{inventory_hostname}}:{{etcdClientPort}}
 # Discovery URL used to bootstrap the cluster.
-# discovery: {{ etcdDiscoveryUrl }}
+# discovery:
 
 # Valid values include 'exit', 'proxy'
 #discovery-fallback: 'proxy'
