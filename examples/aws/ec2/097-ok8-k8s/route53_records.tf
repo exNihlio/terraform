@@ -66,7 +66,7 @@ resource "aws_route53_record" "etcd-client-srv-tcp" {
                 "0 0 2379 etcd-node-3.okd.dev"]
 }
 
-resource "aws_route53_record" "etcd-server-srv-tcp" {
+resource "aws_route53_record" "etcd-server-srv-ssl" {
     zone_id = aws_route53_zone.dev.id
     name = "_etcd-server-ssl._tcp"
     type = "SRV"
