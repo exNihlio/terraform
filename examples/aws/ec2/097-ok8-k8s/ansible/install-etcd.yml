@@ -7,10 +7,10 @@
     - name: Set the hostnames
       hostname:
         use: systemd
-        name: "{{ inventory_hostname }}"
+        name: "{{inventory_hostname}}"
     - name: Sync the etcd rpm
       copy:
-        src: "{{ etcdPath }}/{{ etcdRPM }}"
+        src: "{{etcdPath}}/{{etcdRPM }}"
         dest: /tmp/
         owner: root
         group: root
@@ -18,7 +18,7 @@
 
     - name: Install etcd
       yum:
-        name: "/tmp/{{ etcdRPM }}"
+        name: "/tmp/{{etcdRPM}}"
         state: present
       notify:
         - restart-etcd
@@ -26,7 +26,7 @@
     - name: Sync the etcd.conf template
       template:
         src: templates/etcd.j2
-        dest: "{{ etcdConfDir }}/etcd.conf"
+        dest: "{{etcdConfDir}}/etcd.conf"
         owner: etcd
         group: root
         mode: 0644
@@ -50,7 +50,9 @@
       file:
         state: directory
         path: files
-        mode: 0700
+        mode: 0755
+        owner: root
+        group: root
       when: enableTLS == true
       delegate_to: localhost
       run_once: True
@@ -72,10 +74,10 @@
         path: files/ca.csr
         privatekey_path: files/ca.key
         # provider: selfsigned
-        email_address: "{{ emailAddress }}"
-        country_name: "{{ countryName }}"
-        organization_name: "{{ organizationName }}"
-        common_name: "{{ commonName }}"
+        email_address: "{{emailAddress}}"
+        country_name: "{{countryName}}"
+        organization_name: "{{organizationName}}"
+        common_name: "{{commonName}}"
       when: enableTLS == true
       notify:
         - update-ca-trust
@@ -96,26 +98,48 @@
       delegate_to: localhost
       run_once: True
 
-  #   - name: Create the *.okd.dev wildcard key
-  #     when: enableTLS is true
-  #     notify:
-  #       - update-ca-trust
-  #       - restart-etcd
-  #     delegate_to: localhost
+    - name: Create the *.okd.dev wildcard key
+      when: enableTLS is true
+      openssl_privatekey:
+        path: files/{{wildcardKeyName}}.key
+        type: RSA
+        size: 4096
+      notify:
+        - update-ca-trust
+        - restart-etcd
+      delegate_to: localhost
+      run_once: True
 
-  #   - name: Create the *.okd.dev wildcard csr
-  #     when: enableTLS is true
-  #     notify:
-  #       - update-ca-trust
-  #       - restart-etcd
-  #     delegate_to: localhost
+    - name: Create the *.okd.dev wildcard csr
+      openssl_csr:
+        path: files/{{wildcardCsrName}}.csr
+        privatekey_path: files/{{wildcardKeyName}}.key
+        # provider: selfsigned
+        email_address: "{{emailAddress}}"
+        country_name: "{{countryName}}"
+        organization_name: "{{organizationName}}"
+        common_name: "{{wildcardCommonName}}"
+      when: enableTLS is true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+      delegate_to: localhost
+      run_once: True
 
-  #   - name: Create the *.okd.dev wildcard crt
-  #     when: enableTLS is true
-  #     notify:
-  #       - update-ca-trust
-  #       - restart-etcd
-  #     delegate_to: localhost
+    - name: Create the *.okd.dev wildcard crt
+      openssl_certificate:
+        path: files/{{wildcardCrtName}}.crt
+        privatekey_path: files/{{wildcardKeyName}}.key
+        csr_path: files/{{wildcardCsrName}}.csr
+        ownca_path: files/ca.crt
+        ownca_privatekey_path: files/ca.key
+        provider: ownca
+      when: enableTLS is true
+      notify:
+        - update-ca-trust
+        - restart-etcd
+      delegate_to: localhost
+      run_once: True
 
   #   - name: Create CA directory
   #     file:
