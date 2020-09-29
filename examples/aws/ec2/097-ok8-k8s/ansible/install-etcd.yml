@@ -32,12 +32,6 @@
         mode: 0644
       notify:
         - restart-etcd
-
-    - name: Ensure that the Python cryptography backend is installed
-      yum:
-        name: python3-cryptography
-        state: present
-      delegate_to: localhost
       
     - name: Ensure that etcd is started
       systemd:
