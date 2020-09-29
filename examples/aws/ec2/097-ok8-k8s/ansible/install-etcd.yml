@@ -33,8 +33,10 @@
       notify:
         - restart-etcd
 
+    - name: Install the Python-Pip3 
+
     - name: Ensure that the Python cryptography backend is installed
-      pip:
+      pip3:
         name: cryptography
         state: present
       
