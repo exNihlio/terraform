@@ -45,6 +45,14 @@
         state: present
       delegate_to: localhost
 
+    - name: Ensure 'files' exists
+      file:
+        type: directory
+        path: files
+        mode: 0700
+      when: enableTLS == true
+      delegate_to: localhost
+
     - name: Create the root CA key
       openssl_privatekey:
         path: files/ca.key
