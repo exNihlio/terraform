@@ -44,6 +44,7 @@
         name: python3-cryptography
         state: present
       delegate_to: localhost
+      run_once: True
 
     - name: Ensure 'files' exists
       file:
@@ -52,6 +53,7 @@
         mode: 0700
       when: enableTLS == true
       delegate_to: localhost
+      run_once: True
 
     - name: Create the root CA key
       openssl_privatekey:
@@ -63,6 +65,7 @@
         - update-ca-trust
         - restart-etcd
       delegate_to: localhost
+      run_once: True
 
     - name: Create the CA cert
       openssl_csr:
@@ -78,6 +81,7 @@
         - update-ca-trust
         - restart-etcd
       delegate_to: localhost
+      run_once: True
 
     - name: Create the CA cert
       openssl_certificate:
@@ -90,6 +94,7 @@
         - update-ca-trust
         - restart-etcd
       delegate_to: localhost
+      run_once: True
 
   #   - name: Create the *.okd.dev wildcard key
   #     when: enableTLS is true
