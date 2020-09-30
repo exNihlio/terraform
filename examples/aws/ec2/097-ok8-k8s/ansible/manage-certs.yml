@@ -7,7 +7,7 @@
     - name: Deploy the ca.pem file
       copy:
         src: certs/ca.pem
-        dest: /etc/pki/tls/private/k8s-ca.pem
+        dest: /etc/pki/tls/certs/k8s-ca.pem
         owner: etcd
         mode: root
         mode: 0600
