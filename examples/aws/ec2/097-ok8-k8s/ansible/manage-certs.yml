@@ -8,7 +8,7 @@
       copy:
         src: certs/ca.pem
         dest: /etc/pki/tls/certs/k8s-ca.pem
-        owner: etcd
+        owner: root
         mode: root
         mode: 0600
 
