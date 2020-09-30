@@ -106,33 +106,33 @@ proxy-read-timeout: 0
 
 client-transport-security:
   # Path to the client server TLS cert file.
-  #cert-file: /etc/pki/tls/certs/{{wildcardCrtName}}.crt
+  cert-file: /etc/pki/tls/certs/{{inventory_hostname}}.pem
 
   # Path to the client server TLS key file.
-  #key-file: /etc/pki/tls/private/{{wildcardKeyName}}.key
+  key-file: /etc/pki/tls/private/{{inventory_hostname}}-pem.key
 
   # Enable client cert authentication.
   #client-cert-auth: false
 
   # Path to the client server TLS trusted CA cert file.
-  #trusted-ca-file: /etc/pki/tls/certs/ca.crt
+  trusted-ca-file: /etc/pki/tls/certs/k8s-ca.pem
   # Client TLS using generated certificates
-  auto-tls: {{enableTLS}}
+  #auto-tls: {{enableTLS}}
 
 peer-transport-security:
   # Path to the peer server TLS cert file.
-  #cert-file: /etc/pki/tls/certs/{{wildcardCrtName}}.crt
+  cert-file: /etc/pki/tls/certs/{{inventory_hostname}}.pem
 
   # Path to the peer server TLS key file.
-  #key-file: /etc/pki/tls/private/{{wildcardKeyName}}.key
+  key-file: /etc/pki/tls/private/{{inventory_hostname}}-pem.key
 
   # Enable peer client cert authentication.
   #client-cert-auth: false
 
   # Path to the peer server TLS trusted CA cert file.
-  #trusted-ca-file: /etc/pki/tls/certs/ca.crt
+  trusted-ca-file: /etc/pki/tls/certs/k8s-ca.pem
   # Peer TLS using generated certificates.
-  auto-tls: {{enableTLS}}
+  #auto-tls: {{enableTLS}}
 
 # Enable debug-level logging for etcd.
 debug: false
