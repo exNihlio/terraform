@@ -14,6 +14,8 @@ IP_ADDRESSES=(["etcd-node-1.okd.dev"]=${ETCD_HOST_1_IP}
               ["etcd-node-2.okd.dev"]=${ETCD_HOST_2_IP}
               ["etcd-node-3.okd.dev"]=${ETCD_HOST_3_IP})
 
+mkdir -p certs
+
 echo -e "${ASCII_RED}Generating CA${ASCII_RESET}"
 cd certs \
 && cfssl gencert \
