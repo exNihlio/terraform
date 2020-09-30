@@ -109,7 +109,7 @@ client-transport-security:
   cert-file: /etc/pki/tls/certs/{{inventory_hostname}}.pem
 
   # Path to the client server TLS key file.
-  key-file: /etc/pki/tls/private/{{inventory_hostname}}-pem.key
+  key-file: /etc/pki/tls/private/{{inventory_hostname}}-key.pem
 
   # Enable client cert authentication.
   #client-cert-auth: false
@@ -124,7 +124,7 @@ peer-transport-security:
   cert-file: /etc/pki/tls/certs/{{inventory_hostname}}.pem
 
   # Path to the peer server TLS key file.
-  key-file: /etc/pki/tls/private/{{inventory_hostname}}-pem.key
+  key-file: /etc/pki/tls/private/{{inventory_hostname}}-key.pem
 
   # Enable peer client cert authentication.
   #client-cert-auth: false
