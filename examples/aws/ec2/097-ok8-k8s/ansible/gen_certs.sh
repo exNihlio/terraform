@@ -44,6 +44,6 @@ for i in $(seq 1 3 ); do
   -config=../files/ca-config.json \
   -hostname=etcd-node-${i}.okd.dev,${ADDRESS} \
   -profile=kubernetes \
-  ../files/etcd-node-${i}-csr.json | cfssljson -bare etcd-node-${i}
+  ../files/etcd-node-${i}-csr.json | cfssljson -bare etcd-node-${i}.okd.dev
 done
 cd ..
