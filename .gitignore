@@ -4,4 +4,5 @@ terraform.tfstate.backup
 *.rpm
 *.dpkg
 *.swp
+certs/
 base.yml

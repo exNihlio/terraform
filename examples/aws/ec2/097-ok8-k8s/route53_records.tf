@@ -45,3 +45,33 @@ resource "aws_route53_record" "etcd3" {
     ttl = "300"
     records = [ aws_instance.etcd-node-3.private_ip ]  
 }
+
+resource "aws_route53_record" "etcd-server-srv-tcp" {
+    zone_id = aws_route53_zone.dev.id
+    name = "_etcd-server._tcp"
+    type = "SRV"
+    ttl = "60"
+    records = [ "0 0 2380 etcd-node-1.okd.dev",
+                "0 0 2380 etcd-node-2.okd.dev",
+                "0 0 2380 etcd-node-3.okd.dev"]
+}
+
+resource "aws_route53_record" "etcd-client-srv-tcp" {
+    zone_id = aws_route53_zone.dev.id
+    name = "_etcd-client._tcp"
+    type = "SRV"
+    ttl = "60"
+    records = [ "0 0 2379 etcd-node-1.okd.dev",
+                "0 0 2379 etcd-node-2.okd.dev",
+                "0 0 2379 etcd-node-3.okd.dev"]
+}
+
+resource "aws_route53_record" "etcd-server-srv-ssl" {
+    zone_id = aws_route53_zone.dev.id
+    name = "_etcd-server-ssl._tcp"
+    type = "SRV"
+    ttl = "60"
+    records = [ "0 0 2380 etcd-node-1.okd.dev",
+                "0 0 2380 etcd-node-2.okd.dev",
+                "0 0 2380 etcd-node-3.okd.dev"]
+}

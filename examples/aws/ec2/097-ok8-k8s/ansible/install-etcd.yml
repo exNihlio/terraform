@@ -7,10 +7,11 @@
     - name: Set the hostnames
       hostname:
         use: systemd
-        name: "{{ inventory_hostname }}"
+        name: "{{inventory_hostname}}"
+        
     - name: Sync the etcd rpm
       copy:
-        src: "{{ etcdPath }}/{{ etcdRPM }}"
+        src: "{{etcdPath}}/{{etcdRPM }}"
         dest: /tmp/
         owner: root
         group: root
@@ -18,7 +19,7 @@
 
     - name: Install etcd
       yum:
-        name: "/tmp/{{ etcdRPM }}"
+        name: "/tmp/{{etcdRPM}}"
         state: present
       notify:
         - restart-etcd
@@ -26,7 +27,7 @@
     - name: Sync the etcd.conf template
       template:
         src: templates/etcd.j2
-        dest: "{{ etcdConfDir }}/etcd.conf"
+        dest: "{{etcdConfDir}}/etcd.conf"
         owner: etcd
         group: root
         mode: 0644
@@ -38,17 +39,6 @@
         name: etcd
         state: started
         enabled: True
-  #   - name: Untar etcd
-
-  #   - name: Create etcd service file
-
-  #   - name: Copy etcd certificate
-
-  #   - name: Copy etcd key
-
-  #   - name: Copy etcd ca-cert.crt
-
-  #   - name: Ensure etcd is running
 
   handlers:
     - name: Restart etcd

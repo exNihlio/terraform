@@ -17,10 +17,25 @@ etcdConfDir: /etc/etcd.d/
 etcdDataDir: "/var/lib/etcd"
 etcdClientPort: 2379
 etcdPeerPort: 2380
-etcdMode: "http"
+etcdPeerMode: "https"
+etcdClientMode: "http"
 etcdPath: etcd
-etcdPeerUrls: "{{etcdMode}}://etcd-node-1.okd.dev:{{etcdPeerPort}},{{etcdMode}}://etcd-node-2.okd.dev:{{etcdPeerPort}},{{etcdMode}}://etcd-node-3.okd.dev:{{etcdPeerPort}}"
-etcdClientUrls: "{{etcdMode}}://etcd-node-1.okd.dev:{{etcdClientPort}},{{etcdMode}}://etcd-node-2.okd.dev:{{etcdClientPort}},{{etcdMode}}://etcd-node-3.okd.dev:{{etcdClientPort}}"
-etcdDiscoveryUrl: "{{etcdMode}}://etcd-node-1.okd.dev:{{etcdPeerPort}}"
+etcdPeerUrls: "{{etcdPeerMode}}://etcd-node-1.okd.dev:{{etcdPeerPort}},{{etcdMode}}://etcd-node-2.okd.dev:{{etcdPeerPort}},{{etcdPeerMode}}://etcd-node-3.okd.dev:{{etcdPeerPort}}"
+etcdClientUrls: "{{etcdClientMode}}://etcd-node-1.okd.dev:{{etcdClientPort}},{{etcdClientMode}}://etcd-node-2.okd.dev:{{etcdClientPort}},{{etcdClientMode}}://etcd-node-3.okd.dev:{{etcdClientPort}}"
+etcdDiscoverySRV: "okd.dev"
 etcdVer: "v3.4.13-1"
 etcdRPM: "etcd-{{ etcdVer }}.x86_64.rpm"
+## Enable TLS for etcd
+enableTLS: true
+enablePeerTLS: true
+enableClientTLS: false
+etcdWildCard: "*.okd.dev"
+## CSR Data
+emailAddress: "example@example.com"
+countryName: "US"
+organizationName: "Example Company"
+commonName: "etcd-example-donottrust"
+wildcardCommonName: "*.okd.dev"
+wildcardKeyName: "star_okd_dev"
+wildcardCsrName: "star_okd_dev"
+wildcardCrtName: "star_okd_dev"

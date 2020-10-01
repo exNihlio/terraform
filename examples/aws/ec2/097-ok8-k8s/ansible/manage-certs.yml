@@ -1,0 +1,47 @@
+- hosts: etcd
+  gather_facts: yes
+  become: yes
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Deploy the ca.pem file
+      copy:
+        src: certs/ca.pem
+        dest: /etc/pki/tls/certs/k8s-ca.pem
+        owner: root
+        mode: root
+        mode: 0644
+
+    - name: Deploy the etcd-node certificates
+      copy:
+        src: certs/{{item}}.pem
+        dest: /etc/pki/tls/certs/
+        owner: root
+        group: root
+        mode: 0644
+      delegate_to: "{{item}}"
+      run_once: True
+      loop:
+        - "{{etcdNode1}}"
+        - "{{etcdNode2}}"
+        - "{{etcdNode3}}"
+
+    - name: Deploy the etcd-node keys
+      copy:
+        src: certs/{{ item }}-key.pem
+        dest: /etc/pki/tls/private/
+        owner: root
+        group: root
+        mode: 0644
+      delegate_to: "{{item}}"
+      run_once: True
+      loop:
+        - "{{etcdNode1}}"
+        - "{{etcdNode2}}"
+        - "{{etcdNode3}}"
+        
+  handlers:
+    - name: Update CA trust
+      command: update-ca-trust
+      listen:
+        - update-ca-trust
