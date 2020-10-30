@@ -1,4 +1,6 @@
 - hosts: all
+  become: yes
+  gather_facts: yes
   vars:
     hostnames:
       - "node-1.k8s.dev"
@@ -6,7 +8,8 @@
       - "node-3.k8s.dev"
   tasks:
     - name: Set the hostname for {{ item }}
-      command: hostnamectl set-hostname {{ item }}
+      hostname: 
+        name: "{{ item }}"
       delegate_to: "{{ item }}"
       run_once: True
       with_items: "{{ hostnames }}"
