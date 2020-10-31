@@ -41,11 +41,11 @@
         state: present
         update_cache: True
 
-    - name: Ensure /var/lib/docker is owned by Docker
-      file:
-        path: /var/lib/docker
-        owner: docker
-        group: root
+    # - name: Ensure /var/lib/docker is owned by Docker
+    #   file:
+    #     path: /var/lib/docker
+    #     owner: dock
+    #     group: root
     
     - name: Drop off the Docker daemon.json file
       copy:
