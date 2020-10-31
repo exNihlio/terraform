@@ -16,7 +16,8 @@ resource "aws_instance" "sgw-1" {
 
 resource "aws_instance" "k8s_node_1" {
     ami = var.amis["us-west-2"]["amd64"]["ubuntu"]["1804"]
-    instance_type = "t2.small"
+    # Kubeadm requires at least 2 vCPUS to install
+    instance_type = "t2.medium"
     user_data = file("cloud-init/base.yml")
     subnet_id = aws_subnet.priv-sub-1.id
     associate_public_ip_address = "false"
@@ -30,7 +31,8 @@ resource "aws_instance" "k8s_node_1" {
 
 resource "aws_instance" "k8s_node_2" {
     ami = var.amis["us-west-2"]["amd64"]["ubuntu"]["1804"]
-    instance_type = "t2.small"
+    # Kubeadm requires at least 2 vCPUS to install
+    instance_type = "t2.medium"
     user_data = file("cloud-init/base.yml")
     subnet_id = aws_subnet.priv-sub-2.id
     associate_public_ip_address = "false"
@@ -44,7 +46,8 @@ resource "aws_instance" "k8s_node_2" {
 
 resource "aws_instance" "k8s_node_3" {
     ami = var.amis["us-west-2"]["amd64"]["ubuntu"]["1804"]
-    instance_type = "t2.small"
+    # Kubeadm requires at least 2 vCPUS to install
+    instance_type = "t2.medium"
     user_data = file("cloud-init/base.yml")
     subnet_id = aws_subnet.priv-sub-3.id
     associate_public_ip_address = "false"
