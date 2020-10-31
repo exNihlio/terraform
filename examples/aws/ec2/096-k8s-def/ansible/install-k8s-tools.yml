@@ -19,6 +19,10 @@
         
     - name: Install k8s tools
       apt:
-        name: kubelet kubectl kubeadm
+        name: "{{ item }}"
         state: present
         update_cache: True
+        with_items:
+          - kubelet
+          - kubectl
+          - kubeadm
