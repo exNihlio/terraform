@@ -30,7 +30,7 @@
 
     - name: Install the Docker apt repository
       apt_repository:
-        url: "{{ docker_apt_url }}"
+        repo: "{{ docker_apt_url }}"
         filename: docker
         update_cache: True
         state: present
