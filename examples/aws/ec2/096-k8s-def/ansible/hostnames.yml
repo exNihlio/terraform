@@ -1,11 +1,8 @@
 - hosts: all
   become: yes
   gather_facts: yes
-  vars:
-    hostnames:
-      - "node-1.k8s.dev"
-      - "node-2.k8s.dev"
-      - "node-3.k8s.dev"
+  vars_files:
+    - vars.yml
   tasks:
     - name: Set the hostname for {{ item }}
       hostname: 

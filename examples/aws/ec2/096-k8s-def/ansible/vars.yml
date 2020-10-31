@@ -3,3 +3,7 @@ google_apt_key_url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
 ubuntu_codename: "bionic"
 docker_disk: /dev/xvdb
 docker_disk_fs_type: xfs
+hostnames:
+  - "k8s-node-1.k8s.dev"
+  - "k8s-node-2.k8s.dev"
+  - "k8s-node-3.k8s.dev"
