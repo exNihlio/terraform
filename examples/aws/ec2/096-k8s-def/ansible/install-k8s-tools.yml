@@ -22,7 +22,7 @@
         name: "{{ item }}"
         state: present
         update_cache: True
-        with_items:
-          - kubelet
-          - kubectl
-          - kubeadm
+      with_items:
+        - kubelet
+        - kubectl
+        - kubeadm
