@@ -11,7 +11,7 @@
 
     - name: Add Google apt cloud packages repo
       apt_repository:
-        repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+        repo: "{{ google_apt_url }}"
         filename: kubernetes
         state: present
         update_cache: True

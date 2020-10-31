@@ -2,6 +2,7 @@
 ubuntu_codename: "bionic"
 system_arch: "amd64"
 google_apt_key_url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+google_apt_url: "deb https://apt.kubernetes.io/ kubernetes-xenial main"
 docker_apt_key_url: https://download.docker.com/linux/ubuntu/gpg
 docker_apt_url: "deb [arch={{system_arch}}] https://download.docker.com/linux/ubuntu {{ ubuntu_codename }} stable"
 docker_disk: /dev/xvdb
