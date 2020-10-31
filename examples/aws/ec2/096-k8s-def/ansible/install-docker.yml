@@ -34,12 +34,39 @@
         filename: docker
         update_cache: True
         state: present
-    # - name: Install Docker
-    # - name: Drop off the Docker daemon.json file
-    # - name: Ensure Docker is started
+
+    - name: Install Docker
+      apt:
+        name: docker
+        state: present
+        update_cache: True
+
+    - name: Ensure /var/lib/docker is owned by Docker
+      file:
+        path: /var/lib/docker
+        owner: docker
+        group: root
+    
+    - name: Drop off the Docker daemon.json file
+      copy:
+        src: files/daemon.json
+        dest: /etc/docker/
+        owner: root
+        group: docker
+        mode: 0600
+      notify:
+        - restart-docker
+
+    - name: Ensure Docker is started
+      service:
+        name: docker
+        state: started
+        enabled: True
   handlers:
     - name: Restart Docker
       service:
         name: docker
         state: started
         enabled: True
+      listen:
+        - restart-docker

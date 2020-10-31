@@ -4,7 +4,7 @@
   tasks:
     - name: Copy the ansible_hosts file
       copy:
-        src: ansible_hosts
+        src: files/ansible_hosts
         dest: /etc/ansible/hosts
         owner: root
         mode: 0644
