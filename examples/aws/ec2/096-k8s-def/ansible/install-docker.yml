@@ -37,7 +37,7 @@
 
     - name: Install Docker
       apt:
-        name: docker
+        name: docker-ce
         state: present
         update_cache: True
 
@@ -59,7 +59,7 @@
 
     - name: Ensure Docker is started
       service:
-        name: docker-ce
+        name: docker
         state: started
         enabled: True
   handlers:
