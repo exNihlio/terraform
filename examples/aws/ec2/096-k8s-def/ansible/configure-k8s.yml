@@ -1,0 +1,18 @@
+- hosts: localhost
+  gather_facts: True
+  become: True
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Add Google apt cloud packages key
+      apt_key:
+        url: "{{ google_apt_key_url }}"
+        state: present
+    - name: Add Google apt cloud packages repo
+      apt_repository:
+        repo: deb https://apt.kubernetes.io/ kubernetes-{{ ubuntu_codename }} main
+        filename: kubernetes
+        state: present
+        
+    # - name: Install kubectl
+    # - name: Install kubeadm
