@@ -1,4 +1,4 @@
-- hosts: localhost
+- hosts: k8s
   gather_facts: True
   become: True
   vars_files:
@@ -8,11 +8,17 @@
       apt_key:
         url: "{{ google_apt_key_url }}"
         state: present
+
     - name: Add Google apt cloud packages repo
       apt_repository:
         repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
         filename: kubernetes
         state: present
+        update_cache: True
+      ignore_errors: True
         
-    # - name: Install kubectl
-    # - name: Install kubeadm
+    - name: Install k8s tools
+      apt:
+        name: kubelet kubectl kubeadm
+        state: present
+        update_cache: True
