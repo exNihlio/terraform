@@ -1,1 +1,36 @@
 - hosts: k8s
+  gather_facts: True
+  become: True
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Format the Docker disk
+      filesystem:
+        dev: "{{ docker_disk }}"
+        fstype: "{{ docker_disk_fs_type }}"
+
+    - name: Make the Docker directory
+      file:
+        path: /var/lib/docker
+        state: directory
+        mode: 0700
+
+    - name: Mount the Docker disk
+      mount:
+        path: /var/lib/docker
+        src: "{{ docker_disk }}"
+        state: mounted
+        fstype: "{{ docker_disk_fs_type }}"
+        opts: defaults
+
+    # - name: Install the Docker apt key
+    # - name: Install the Docker apt repository
+    # - name: Install Docker
+    # - name: Drop off the Docker daemon.json file
+    # - name: Ensure Docker is started
+  handlers:
+    - name: Restart Docker
+      service:
+        name: docker
+        state: started
+        enabled: True

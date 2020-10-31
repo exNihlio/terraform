@@ -1,3 +1,5 @@
 google_apt_key_url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
 ## Assuming you are installng on Ubuntu 18.04 Bionic Beaver
 ubuntu_codename: "bionic"
+docker_disk: /dev/xvdb
+docker_disk_fs_type: xfs
