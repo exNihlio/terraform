@@ -10,7 +10,7 @@
         state: present
     - name: Add Google apt cloud packages repo
       apt_repository:
-        repo: deb https://apt.kubernetes.io/ kubernetes-{{ ubuntu_codename }} main
+        repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
         filename: kubernetes
         state: present
         
