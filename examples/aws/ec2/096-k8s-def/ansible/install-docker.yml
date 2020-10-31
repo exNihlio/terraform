@@ -59,7 +59,7 @@
 
     - name: Ensure Docker is started
       service:
-        name: docker
+        name: docker-ce
         state: started
         enabled: True
   handlers:
