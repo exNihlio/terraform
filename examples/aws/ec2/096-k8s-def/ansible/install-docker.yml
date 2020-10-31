@@ -23,8 +23,17 @@
         fstype: "{{ docker_disk_fs_type }}"
         opts: defaults
 
-    # - name: Install the Docker apt key
-    # - name: Install the Docker apt repository
+    - name: Install the Docker apt key
+      apt_key:
+        url: "{{ docker_apt_key_url }}"
+        state: present
+
+    - name: Install the Docker apt repository
+      apt_repository:
+        url: "{{ docker_apt_url }}"
+        filename: docker
+        update_cache: True
+        state: present
     # - name: Install Docker
     # - name: Drop off the Docker daemon.json file
     # - name: Ensure Docker is started
