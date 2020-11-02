@@ -1,3 +1,4 @@
+## Do not run install-crio.yml and install-docker.yml together.
 - hosts: k8s
   gather_facts: True
   become: True

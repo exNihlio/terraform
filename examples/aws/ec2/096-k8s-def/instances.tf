@@ -10,7 +10,7 @@ resource "aws_instance" "sgw-1" {
     availability_zone = "us-west-2a"
     tags = {
         Name = "sgw-1"
-        Manager = "terraform"
+        Manager = "Terraform"
     }
 }
 
@@ -25,7 +25,7 @@ resource "aws_instance" "k8s_node_1" {
     availability_zone = "us-west-2a"
     tags = {
         Name = "k8s-node-1"
-        Manager = "terraform"
+        Manager = "Terraform"
     }
 }
 

@@ -1,0 +1,33 @@
+## Do not run install-crio.yml and install-docker.yml together.
+- hosts: k8s
+  gather_facts: yes
+  become: yes
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Install the libcontainers apt key
+      apt_key:
+        url: "{{ libcontainer_apt_key_url }}"
+        state: present
+
+    - name: Install the libcontainers cri-o apt key
+      apt_key: 
+        url: "{{ libcontainer_crio_apt_key_url }}"
+        state: present
+
+    - name: Install the libcontainers repo
+      apt_repository:
+        repo: "{{ libcontainer_apt_url }}"
+        file: "devel:kubic:libcontainers:stable"
+        update_cache: True
+        state: present
+
+    - name: Install the libcontainers cri-o repo
+      apt_repository:
+        repo: "{{ libcontainer_crio_apt_url }}"
+        file: "devel:kubic:libcontainers:stable:cri-o:{{ crio_version }}"
+        update_cache: True
+        state: present
+
+
+

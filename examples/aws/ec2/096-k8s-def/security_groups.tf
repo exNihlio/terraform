@@ -56,8 +56,8 @@ resource "aws_security_group" "k8s_sg" {
     }
     # Inter-cluster communication
     ingress {
-        from_port = 0
-        to_port = 0
+        from_port = 1
+        to_port = 65535
         protocol = "TCP"
         cidr_blocks = [ aws_subnet.priv-sub-1.cidr_block,
                         aws_subnet.priv-sub-2.cidr_block,
