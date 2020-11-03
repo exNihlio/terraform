@@ -1,0 +1,22 @@
+- hosts: k8s
+  gather_facts: yes
+  become: yes
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Create the kubelet config directory
+      file:
+        path: /var/lib/kubelet
+        state: directory
+        owner: root
+        group: root
+        mode: 755
+
+    - name: Drop off the kubelet config file
+      copy:
+        src: files/kubelet-config.yml
+        dest: /var/lib/kubelet/config.yaml
+        state: present
+        owner: root
+        group: root
+        mode: 0644
