@@ -46,7 +46,7 @@
         daemon_reload: True
     # Review here: https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cri-o
     - name: Enable the overlay kernel module
-      modeprobe:
+      modprobe:
         name: overlay
         state: present
 
