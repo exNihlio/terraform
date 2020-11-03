@@ -13,6 +13,7 @@ libcontainer_apt_url: "deb https://download.opensuse.org/repositories/devel:/kub
 libcontainer_crio_apt_url: "deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/{{ crio_version }}/{{ crio_os_version }}/ /"
 libcontainer_apt_key_url: https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/{{ crio_os_version }}/Release.key
 libcontainer_crio_apt_key_url: https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:{{ crio_version }}/{{ crio_os_version }}/Release.key
+container_runtime: cri-o
 hostnames:
   - "k8s-node-1.k8s.dev"
   - "k8s-node-2.k8s.dev"

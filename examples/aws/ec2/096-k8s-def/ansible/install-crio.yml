@@ -44,6 +44,30 @@
         state: started
         enabled: True
         daemon_reload: True
+    # Review here: https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cri-o
+    - name: enable net.bridge.bridge-nf-call-iptables
+      sysctl:
+        name: net.bridge.bridge-nf-call-iptables
+        value: 1
+        sysctl_file: /etc/sysctl.d/99-kubernetes-cri.conf
+        state: present
+        reload: True
+
+    - name: enable net.ipv4.ip_forward
+      sysctl:
+        name: net.ipv4.ip_forward
+        value: 1
+        sysctl_file: /etc/sysctl.d/99-kubernetes-cri.conf
+        state: present
+        reload: True
+
+    - name: enable net.bridge.bridge-nf-call-ip6tables
+      sysctl:
+        name: net.bridge.bridge-nf-call-ip6tables
+        value: 1
+        sysctl_file: /etc/sysctl.d/99-kubernetes-cri.conf
+        state: present
+        reload: True
 
 
 
