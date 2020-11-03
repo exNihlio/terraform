@@ -18,14 +18,14 @@
     - name: Install the libcontainers repo
       apt_repository:
         repo: "{{ libcontainer_apt_url }}"
-        file: "devel:kubic:libcontainers:stable"
+        filename: "devel:kubic:libcontainers:stable"
         update_cache: True
         state: present
 
     - name: Install the libcontainers cri-o repo
       apt_repository:
         repo: "{{ libcontainer_crio_apt_url }}"
-        file: "devel:kubic:libcontainers:stable:cri-o:{{ crio_version }}"
+        filename: "devel:kubic:libcontainers:stable:cri-o:{{ crio_version }}"
         update_cache: True
         state: present
 
