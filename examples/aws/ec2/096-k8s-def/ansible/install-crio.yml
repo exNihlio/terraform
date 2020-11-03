@@ -43,6 +43,7 @@
         name: crio
         state: started
         enabled: True
+        daemon_reload: True
 
 
 
