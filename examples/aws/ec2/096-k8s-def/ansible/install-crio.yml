@@ -29,5 +29,20 @@
         update_cache: True
         state: present
 
+    - name: Install cri-o and cri-o-runc
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: True
+      with_items:
+        - cri-o
+        - cri-o-runc
+
+    - name: Start crio
+      systemd:
+        name: crio
+        state: started
+        enabled: True
+
 
 
