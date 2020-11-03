@@ -20,3 +20,15 @@
         owner: root
         group: root
         mode: 0644
+      notify:
+        - restart-kubelet
+
+  handlers:
+    - name: Restart kubelet
+      systemd:
+        name: kubelet
+        state: restarted
+        enabled: True
+        daemon_reload: True
+      listen:
+        - restart-kubelet
