@@ -45,6 +45,16 @@
         enabled: True
         daemon_reload: True
     # Review here: https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cri-o
+    - name: Enable the overlay kernel module
+      modeprobe:
+        name: overlay
+        state: present
+
+    - name: Enable the br_netfilter kernel module
+      modprobe:
+        name: br_netfilter
+        state: present
+
     - name: enable net.bridge.bridge-nf-call-iptables
       sysctl:
         name: net.bridge.bridge-nf-call-iptables
