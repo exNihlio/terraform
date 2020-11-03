@@ -57,11 +57,12 @@
         name: docker
         state: started
         enabled: True
+
   handlers:
     - name: Restart Docker
       service:
         name: docker
-        state: started
+        state: restarted
         enabled: True
       listen:
         - restart-docker
