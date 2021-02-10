@@ -19,7 +19,6 @@ resource "aws_codebuild_project" "sample" {
         type = "GITHUB"
         location = var.github_url
     }
-
     environment {
         # These are environment specific settings and define what
         # the build runtime and computer environment looks like.
