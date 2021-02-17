@@ -1,0 +1,20 @@
+## Assuming you are installng on Ubuntu 18.04 Bionic Beaver
+ubuntu_codename: "bionic"
+system_arch: "amd64"
+google_apt_key_url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+google_apt_url: "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+docker_apt_key_url: https://download.docker.com/linux/ubuntu/gpg
+docker_apt_url: "deb [arch={{system_arch}}] https://download.docker.com/linux/ubuntu {{ ubuntu_codename }} stable"
+docker_disk: /dev/xvdb
+docker_disk_fs_type: xfs
+crio_version: 1.19
+crio_os_version: xUbuntu_18.04
+libcontainer_apt_url: "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/{{ crio_os_version }}/ /"
+libcontainer_crio_apt_url: "deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/{{ crio_version }}/{{ crio_os_version }}/ /"
+libcontainer_apt_key_url: https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/{{ crio_os_version }}/Release.key
+libcontainer_crio_apt_key_url: https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:{{ crio_version }}/{{ crio_os_version }}/Release.key
+container_runtime: cri-o
+hostnames:
+  - "k8s-node-1.k8s.dev"
+  - "k8s-node-2.k8s.dev"
+  - "k8s-node-3.k8s.dev"

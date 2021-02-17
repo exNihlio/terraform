@@ -6,4 +6,3 @@ resource "aws_codebuild_source_credential" "webhook_example" {
     ## Secrets Manager. Do not store secrets in your Terraform code.
     #token       = var.github_oauth_token
     token       = ""
-}

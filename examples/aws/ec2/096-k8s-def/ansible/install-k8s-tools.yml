@@ -1,0 +1,28 @@
+- hosts: k8s
+  gather_facts: True
+  become: True
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Add Google apt cloud packages key
+      apt_key:
+        url: "{{ google_apt_key_url }}"
+        state: present
+
+    - name: Add Google apt cloud packages repo
+      apt_repository:
+        repo: "{{ google_apt_url }}"
+        filename: kubernetes
+        state: present
+        update_cache: True
+      ignore_errors: True
+        
+    - name: Install k8s tools
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: True
+      with_items:
+        - kubelet
+        - kubectl
+        - kubeadm

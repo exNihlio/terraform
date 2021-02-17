@@ -16,6 +16,8 @@ variable "aws_default_region" {
 variable "source_version" {
     default = "qa"
 }
+## This is just just example data
+
 variable "github_oauth_token" {
     default = "29u9ea1pyaiwhdiawbd87ai2yEI7AGW"
 }
