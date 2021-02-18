@@ -1,0 +1,19 @@
+version: 0.2
+env:
+  shell: bash
+phases:
+  install:
+    commands:
+      - echo "Skipping..."
+  pre_build:
+    commands:
+      - echo "Skipping..."
+  build:
+    commands:
+      - echo "Skipping..."
+  post_build:
+    commands:
+      - echo "Skipping..."
+artifacts:
+  files:
+    - '**/*'
