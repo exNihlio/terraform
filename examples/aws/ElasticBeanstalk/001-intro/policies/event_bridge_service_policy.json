@@ -1,0 +1,19 @@
+{
+    "Statement": [
+      {
+        "Action": "codebuild:*",
+        "Resource": "*",
+        "Effect": "Allow"
+      },
+      {
+        "Action": [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ],
+        "Effect": "Allow",
+        "Resource": "*"
+      }
+    ],
+      "Version": "2012-10-17"
+}

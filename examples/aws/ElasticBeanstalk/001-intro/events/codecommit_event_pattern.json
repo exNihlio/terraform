@@ -1,0 +1,5 @@
+{
+    "source": ["aws.codecommit"],
+    "detail-type": ["CodeCommit Repository State Change"],
+    "resources": ["arn:aws:codecommit:${region}:${account_id}:${repo_name}"]
+  }
