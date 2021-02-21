@@ -39,3 +39,14 @@ resource "aws_subnet" "sub_priv_2" {
         manager = "terraform"
     }
 }
+
+## Subnet for Redis
+resource "aws_subnet" "sub_priv_3" {
+    vpc_id = aws_vpc.flaskapp_vpc.id
+    cidr_block = "10.72.5.0/28"
+    availability_zone = "us-west-2a"
+    tags = {
+        Name = "flask-app-sub-priv-3"
+        manager = "terraform"
+    }
+}

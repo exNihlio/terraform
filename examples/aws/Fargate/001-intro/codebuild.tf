@@ -12,6 +12,7 @@ resource "aws_codebuild_project" "flask_image" {
         type = "LINUX_CONTAINER"
         image = "aws/codebuild/amazonlinux2-x86_64-standard:3.0"
         compute_type =  "BUILD_GENERAL1_SMALL"
+        privileged_mode = true
         environment_variable {
             name = "AWS_ACCOUNT_ID"
             value = data.aws_caller_identity.current.account_id

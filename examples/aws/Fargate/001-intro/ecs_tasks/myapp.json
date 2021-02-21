@@ -1,7 +1,7 @@
 [
     {
         "name": "flaskapp",
-        "image": "${var.aws_account_id}.dkr.ecr.${var.region}.amazonaws.com/${flask_app_repo}:${flask_app_tag}",
+        "image": "${aws_account_id}.dkr.ecr.${region}.amazonaws.com/${flask_app_repo}:${flask_app_tag}",
         "memoryReservation": 512,
         "cpu": 256,
         "essential": true,

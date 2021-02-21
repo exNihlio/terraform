@@ -40,3 +40,22 @@ resource "aws_security_group" "flaskapp_sg" {
 
     }
 }
+
+resource "aws_security_group" "redis_sg" {
+    name = "redis-sg"
+    description = "Allow incoming Redis connections"
+    vpc_id = aws_vpc.flaskapp_vpc.id 
+    ingress {
+        from_port = 6379
+        to_port = 6379
+        protocol = "TCP"
+        security_groups = [ aws_security_group.flaskapp_sg.id]
+    }
+    egress {
+        from_port = 0
+        to_port = 0
+        protocol = "TCP"
+        cidr_blocks = ["0.0.0.0/0"]
+
+    }
+}

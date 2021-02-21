@@ -2,7 +2,7 @@ data "template_file" "flask_app_task_def" {
     template = file("ecs_tasks/myapp.json")
     vars = {
         aws_account_id = data.aws_caller_identity.current.id
-        aws_region = var.region
+        region = var.region
         flask_app_repo = var.flask_app_repo
         flask_app_tag = var.flask_app_tag
     }
