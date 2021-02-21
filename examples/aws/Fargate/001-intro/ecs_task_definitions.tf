@@ -9,7 +9,7 @@ resource "aws_ecs_task_definition" "flaskapp" {
      # See here: https://aws.amazon.com/fargate/pricing/
      # Memory must also be multiple of 2
      memory = 512
-     container_definitions = file("ecs_tasks/myapp.json")
+     container_definitions = data.template_file.flask_app_task_def.rendered
      execution_role_arn = "arn:aws:iam::305760793472:role/ecsTaskExecutionRole"
      # Task sources this SSM parameters. Do not run container or 
      # create task definition until these parameters exist.

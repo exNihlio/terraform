@@ -1,7 +1,7 @@
-resource "aws_security_group" "alb-flaskapp-public-sg" {
+resource "aws_security_group" "alb_flaskapp_public_sg" {
     name = "alb-flaskapp-public"
     description = "SG for incoming web connections to the flask app ALB"
-    vpc_id = aws_vpc.flaskapp-vpc.id 
+    vpc_id = aws_vpc.flaskapp_vpc.id 
     ingress {
         from_port = 80 
         to_port = 80
@@ -22,15 +22,15 @@ resource "aws_security_group" "alb-flaskapp-public-sg" {
     }
 }
 
-resource "aws_security_group" "flaskapp-sg" {
+resource "aws_security_group" "flaskapp_sg" {
     name = "flaskapp-sg"
     description = "SG to allow incoming connections to flask ecs service"
-    vpc_id = aws_vpc.flaskapp-vpc.id 
+    vpc_id = aws_vpc.flaskapp_vpc.id 
     ingress {
         from_port = 8000
         to_port = 8000
         protocol = "TCP"
-        security_groups = [ aws_security_group.alb-flaskapp-public-sg.id ]
+        security_groups = [ aws_security_group.alb_flaskapp_public_sg.id ]
     }
     egress {
         from_port = 0
