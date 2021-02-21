@@ -4,6 +4,8 @@ resource "aws_codebuild_project" "sample_eb" {
     artifacts {
         type = "S3"
         location = aws_s3_bucket.artifacts_bucket.id
+        name = "sample_eb.zip"
+        packaging = "ZIP"
     }
     source {
         type = "CODECOMMIT"
