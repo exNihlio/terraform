@@ -10,3 +10,7 @@ resource "aws_iam_role_policy_attachment" "event_bridge" {
     role = aws_iam_role.event_bridge_service_role.name
     policy_arn = aws_iam_policy.event_bridge_service_policy.arn
 }
+resource "aws_iam_role_policy_attachment" "vpc_flow_logs" {
+    role = aws_iam_role.vpc_flow_logs_role.name
+    policy_arn = aws_iam_policy.vpc_flow_log_policy.arn
+}

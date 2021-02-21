@@ -14,3 +14,8 @@ resource "aws_iam_policy" "event_bridge_service_policy" {
     description = "Allow EventBridge to invoke CodeBuild"
     policy = file("policies/event_bridge_service_policy.json")
 }
+resource "aws_iam_policy" "vpc_flow_log_policy" {
+    name = "vpc_flow_log_policy"
+    description = "Allow VPC to publish flow logs to CloudWatch"
+    policy = file("policies/cloudwatch_logs_access.json")
+}

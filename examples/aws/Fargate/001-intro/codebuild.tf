@@ -16,6 +16,11 @@ resource "aws_codebuild_project" "flask_image" {
         environment_variable {
             name = "AWS_ACCOUNT_ID"
             value = data.aws_caller_identity.current.account_id
+            
+        }
+        environment_variable {
+            name = "FLASK_IMAGE_REPO"
+            value = aws_ecr_repository.sample_flask.name
         }
     }
     service_role = aws_iam_role.codebuild_service_role.arn

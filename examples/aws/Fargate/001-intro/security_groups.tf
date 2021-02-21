@@ -21,7 +21,6 @@ resource "aws_security_group" "alb_flaskapp_public_sg" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 }
-
 resource "aws_security_group" "flaskapp_sg" {
     name = "flaskapp-sg"
     description = "SG to allow incoming connections to flask ecs service"
@@ -40,7 +39,6 @@ resource "aws_security_group" "flaskapp_sg" {
 
     }
 }
-
 resource "aws_security_group" "redis_sg" {
     name = "redis-sg"
     description = "Allow incoming Redis connections"

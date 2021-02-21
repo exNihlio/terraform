@@ -8,8 +8,8 @@ variable "codecommit_repo_name" {
     default = "flaskapp"
 }
 variable "flask_app_repo" {
-    default = "flask-app"
+    default = "sample/flask"
 }
 variable "flask_app_tag" {
-    default = "0.0.1"
+    default = "1"
 }

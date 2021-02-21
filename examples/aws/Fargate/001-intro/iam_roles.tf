@@ -10,3 +10,7 @@ resource "aws_iam_role" "event_bridge_service_role" {
     name = "EventBridgeServiceRole"
     assume_role_policy = file("roles/event_bridge_service_role.json")
 }
+resource "aws_iam_role" "vpc_flow_logs_role" {
+    name = "aws_vpc_flow_logs_access"
+    assume_role_policy = file("roles/AWSVPCRole.json")
+}
