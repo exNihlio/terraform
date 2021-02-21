@@ -3,6 +3,7 @@ resource "aws_subnet" "sub_pub_1" {
     vpc_id = aws_vpc.flaskapp_vpc.id
     cidr_block = "10.72.1.0/24"
     availability_zone = "us-west-2a"
+    map_public_ip_on_launch = true
     tags = {
         Name = "flask-app-sub-pub-1"
         manager = "terraform"
@@ -14,6 +15,7 @@ resource "aws_subnet" "sub_pub_2" {
     vpc_id = aws_vpc.flaskapp_vpc.id
     cidr_block = "10.72.2.0/24"
     availability_zone = "us-west-2b"
+    map_public_ip_on_launch = true
     tags = {
         Name = "flask-app-sub-pub-2"
         manager = "terraform"

@@ -6,7 +6,7 @@ resource "aws_ecs_service" "flaskapp" {
     #iam_role = aws_iam_role.ecsTaskExecutionRole.arn
     launch_type = "FARGATE"
     network_configuration {
-        subnets = [aws_subnet.sub_priv_1.id,aws_subnet.sub_priv_2.id]
+        subnets = [aws_subnet.sub_priv_1.id]
         security_groups = [aws_security_group.flaskapp_sg.id]
     }
 }
