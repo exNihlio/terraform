@@ -11,8 +11,4 @@ resource "aws_ecs_task_definition" "flaskapp" {
      memory = 512
      container_definitions = data.template_file.flask_app_task_def.rendered
      execution_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.id}:role/ecsTaskExecutionRole"
-     # Task sources this SSM parameters. Do not run container or 
-     # create task definition until these parameters exist.
-     # depends_on = [aws_iam_policy.ecsKMSParameterStore,
-     #               aws_ssm_parameter.ecr_endpoint]
  }

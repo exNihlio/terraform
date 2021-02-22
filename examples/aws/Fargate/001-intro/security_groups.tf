@@ -34,7 +34,7 @@ resource "aws_security_group" "flaskapp_sg" {
     egress {
         from_port = 0
         to_port = 0
-        protocol = "TCP"
+        protocol = "-1"
         cidr_blocks = ["0.0.0.0/0"]
 
     }
@@ -47,12 +47,12 @@ resource "aws_security_group" "redis_sg" {
         from_port = 6379
         to_port = 6379
         protocol = "TCP"
-        security_groups = [ aws_security_group.flaskapp_sg.id]
+        cidr_blocks = [aws_subnet.sub_priv_1.cidr_block, aws_subnet.sub_priv_2.cidr_block]
     }
     egress {
         from_port = 0
         to_port = 0
-        protocol = "TCP"
+        protocol = "-1"
         cidr_blocks = ["0.0.0.0/0"]
 
     }

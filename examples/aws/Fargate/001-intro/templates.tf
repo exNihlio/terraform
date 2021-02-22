@@ -5,6 +5,7 @@ data "template_file" "flask_app_task_def" {
         region = var.region
         flask_app_repo = var.flask_app_repo
         flask_app_tag = var.flask_app_tag
+        #redis_url = aws_elasticache_cluster.ecs_redis.
     }
 }
 # data "template_file" "codebuild_policy" {

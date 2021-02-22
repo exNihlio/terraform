@@ -14,12 +14,12 @@
         ],
         "environment" : [
             { 
-                "name" : "foo", 
-                "value" : "bar"
+                "name" : "redisURL", 
+                "value" : ""
             },
             { 
-                "name" : "buzz", 
-                "value" : "bazz"
+                "name" : "redisPort", 
+                "value" : "6379"
             }
         ],
         "secrets": [

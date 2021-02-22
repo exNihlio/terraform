@@ -17,7 +17,7 @@
 # available to SSH into.  
 
 # Read about cloud-init in the cloud-init-readme.md here in this lesson
-resource "aws_instance" "test-instance-1" {
+resource "aws_instance" "test_instance_1" {
     ami = var.us-west-2a-amd64-2004
     instance_type = "t2.micro"
     user_data = file("cloud-init/base.yml")
