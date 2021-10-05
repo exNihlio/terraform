@@ -1,0 +1,10 @@
+webHosts: |
+  [webhosts]
+  nlb-server-1.nlb.server
+  nlb-server-2.nlb.server
+hostsFile: "/etc/ansible/hosts"
+certName: "star-nlb-cert.crt"
+keyName: "star-nlb-key.key"
+upstreamNLB:
+  nlb-server-1.nlb.server: "10.73.10.0/24"
+  nlb-server-2.nlb.server: "10.73.11.0/24"

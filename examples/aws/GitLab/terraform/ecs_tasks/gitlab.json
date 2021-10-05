@@ -1,0 +1,46 @@
+[
+	{
+		"name": "gitlab",
+		"image": "${aws_account_id}.dkr.ecr.${region}.amazonaws.com/${gitlab_repo}:${gitlab_tag}",
+		"essential": true,
+		"portMappings": [
+			{
+				"hostPort": 443,
+				"containerPort": 443,
+				"protocol": "tcp"
+			},
+			{
+				"hostPort": 80,
+				"containerPort": 80,
+				"protocol": "tcp"
+			},
+			{
+				"hostPort": 22,
+				"containerPort": 22,
+				"protocol": "tcp"
+			}
+		],
+		"logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "gitlab",
+                "awslogs-region": "${region}",
+                "awslogs-stream-prefix": "gitlab"
+            }
+        },
+		"mountPoints": [
+			{
+				"sourceVolume": "gitlab_config",
+				"containerPath": "/etc/gitlab"
+			},
+			{
+				"sourceVolume": "gitlab_logs",
+				"containerPath": "/var/log/gitlab"
+			},
+			{
+				"sourceVolume": "gitlab_data",
+				"containerPath": "/var/opt/gitlab`"
+			}
+		]
+	}
+]

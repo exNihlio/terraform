@@ -1,0 +1,32 @@
+[
+    {
+        "name": "flaskapp",
+        "image": "${aws_account_id}.dkr.ecr.${region}.amazonaws.com/${flask_app_repo}:${flask_app_tag}",
+        "memoryReservation": 512,
+        "cpu": 256,
+        "essential": true,
+        "portMappings": [
+            {
+                "hostPort": 8000,
+                "containerPort":8000,
+                "protocol": "tcp"
+            }
+        ],
+        "environment" : [
+            {
+                "name" : "redisURL",
+                "value" : "${redis_url}"
+            },
+            {
+                "name" : "redisPort",
+                "value" : "6379"
+            }
+        ],
+        "secrets": [
+            {
+                "name": "MY_NOT_SECRET_VALUE",
+                "valueFrom": "arn:aws:secretsmanager:us-west-2:502360673667:secret:flask/prod/secretenv-VgYaFx"
+            }
+        ]
+    }
+]

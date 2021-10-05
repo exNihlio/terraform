@@ -1,0 +1,35 @@
+{
+    "Statement": [
+      {
+        "Action": [
+            "codebuild:*",
+            "codecommit:*",
+            "codepipeline:",
+            "ecs:*",
+            "events:*",
+            "ecr:*",
+            "s3:*"
+        ],
+        "Resource": "*",
+        "Effect": "Allow"
+      },
+      {
+        "Effect": "Allow",
+        "Action": [
+            "iam:GetRole",
+            "iam:PassRole"
+        ],
+        "Resource": "arn:aws:iam::502360673667:role/ecsTaskExecutionRole"
+      },
+      {
+        "Action": [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ],
+        "Effect": "Allow",
+        "Resource": "*"
+      }
+    ],
+      "Version": "2012-10-17"
+}

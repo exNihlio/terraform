@@ -1,0 +1,77 @@
+[
+    {
+        "name": "es_usw2a",
+        "image": "${aws_account_id}.dkr.ecr.${region}.amazonaws.com/${es_repo}:${es_tag}",
+        "cpu": 512,
+        "memoryReservation": 1024,
+        "essential": true,
+        "portMappings": [
+            {
+                "hostPort": 9200,
+                "containerPort": 9200,
+                "protocol": "tcp"
+            },
+            {
+                "hostPort": 9300,
+                "containerPort": 9300,
+                "protocol": "tcp"
+            }
+            
+        ],
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "es-usw2a",
+                "awslogs-region": "${region}",
+                "awslogs-stream-prefix": "es-sd"
+            }
+        },
+        "ulimits": [
+            {
+                "name": "memlock",
+                "softLimit": -1,
+                "hardLimit": -1
+            },
+            {
+                "name": "nofile",
+                "softLimit": 65536,
+                "hardLimit": 65536
+            }
+        ],
+        "environment": [
+            {
+                "name": "node.name",
+                "value": "es_usw2a"
+            },
+            {
+                "name": "network.host",
+                "value": "0.0.0.0"
+            },
+            {
+                "name": "bootstrap.memory_lock",
+                "value": "true"
+            },
+            {
+                "name": "node.store.allow_mmap",
+                "value": "false"
+            },
+            {
+                "name": "discovery.seed_hosts",
+                "value": "es_usw2b.demo,es_usw2c.demo"
+            },
+            {
+                "name": "cluster.initial_master_nodes",
+                "value": "es_usw2a,es_usw2b,es_usw2c"
+            },
+            {
+                "name": "cluster.name",
+                "value": "Professor-Phineas-Von-Fuzzy-Wuzzys-Purrrfect-Cluster-For-Kittens"
+            },
+            {
+                "name": "ES_JAVA_OPTS",
+                "value": "-Xms512m -Xmx512m"
+            }
+        ],
+        "secrets": []
+    }
+]

@@ -1,0 +1,70 @@
+- hosts: webhosts
+  gather_facts: yes
+  become: yes
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Deploy the star-nlb-server certificate
+      copy:
+        src: "{{ certName }}"
+        dest: /etc/ssl/certs/
+        owner: root
+        group: root
+        mode: 0600
+      notify:
+        - restart-nginx
+
+    - name: Deploy the star-nlb-server key
+      copy:
+        src: "{{ keyName }}"
+        dest: /etc/ssl/private
+        owner: root
+        group: root
+        mode: 0600
+      notify:
+        - restart-nginx
+
+    - name: Deploy the nginx.conf
+      template:
+        src: templates/nginx.j2
+        dest: /etc/nginx/nginx.conf
+        owner: root
+        group: root
+        mode: 0644
+      notify:
+        - restart-nginx
+
+    - name: Deploy the nginx index.html
+      template:
+        src: templates/index.j2
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+      notify:
+        - restart-nginx
+
+    - name: Remove default index.html in Debian/Ubuntu
+      file:
+        path: /var/www/html/index.nginx-debian.html
+        state: absent
+      when: ansible_facts['os_family'] == "Debian"
+
+    - name: Start nginx
+      systemd:
+        name: nginx
+        state: started
+        enabled: True
+
+  handlers:
+    - name: Restart nginx
+      systemd:
+        name: nginx
+        state: restarted
+        enabled: True
+      listen:
+        - restart-nginx

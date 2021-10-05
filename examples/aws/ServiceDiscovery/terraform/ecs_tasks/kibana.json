@@ -1,0 +1,40 @@
+[
+    {
+        "name": "kibana",
+        "image": "${aws_account_id}.dkr.ecr.${region}.amazonaws.com/${kibana_repo}:${kibana_tag}",
+        "memoryReservation": 512,
+        "cpu": 256,
+        "essential": true,
+        "portMappings": [
+            {
+                "hostPort": 5601,
+                "containerPort": 5601,
+                "protocol": "tcp"
+            }
+        ],
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "kibana-usw2a",
+                "awslogs-region": "${region}",
+                "awslogs-stream-prefix": "kib"
+            }
+        },
+        "environment" : [
+            {
+                "name": "ELASTICSEARCH_HOSTS",
+                "value": "http://es_usw2a.demo:9200"
+            },
+            {
+                "name": "SERVER_HOST",
+                "value": "0.0.0.0"
+            },
+            {
+                "name": "SERVER_NAME",
+                "value": "dashboard"
+            }
+        ],
+        "secrets": [
+        ]
+    }
+]
