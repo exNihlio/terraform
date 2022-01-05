@@ -51,8 +51,9 @@ resource "aws_security_group" "k3s_cluster_sg" {
     from_port = 6443
     to_port   = 6443
     protocol  = "TCP"
-    cidr_blocks = [aws_subnet.priv_sub_1.cidr_block,
-      aws_subnet.priv_sub_2.cidr_block,
+    cidr_blocks = [aws_subnet.pub_sub_1.cidr_block,
+                   aws_subnet.priv_sub_1.cidr_block,
+                   aws_subnet.priv_sub_2.cidr_block,
     aws_subnet.priv_sub_3.cidr_block]
   }
   ## Flannel VXLAN
