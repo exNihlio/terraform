@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  become: True
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Configure k3s hosts
+      blockinfile:
+        path: /etc/ansible/hosts
+        block: '{{ k3s_hosts }}'
+
+    - name: Disable SSH remote host key checking
+      lineinfile:
+        path: /etc/ansible/ansible.cfg
+        line: 'host_key_checking = False'
+        regex: '^#host_key_checking'
+        state: present

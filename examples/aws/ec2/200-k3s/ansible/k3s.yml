@@ -1,0 +1,43 @@
+---
+- hosts: k3s
+  become: True
+  tasks:
+    - name: Set hostname
+      hostname:
+        name: '{{ inventory_hostname }}'
+
+- hosts: k3s_main
+  become: True
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Fetch the k3s script
+      get_url:
+        url: https://get.k3s.io
+        dest: /root/install_k3s.sh
+
+    - name: Run the k3s install script
+      command: sh /root/install_k3s.sh
+
+- hosts: k3s_workers
+  become: True
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Get k3s token
+      command: cat /var/lib/rancher/k3s/server/node-token
+      register: k3s_token
+      delegate_to: k3s-1.k3s.dev
+      run_once: True
+
+    - name: Fetch the k3s script
+      get_url:
+        url: https://get.k3s.io
+        dest: /root/install_k3s.sh
+
+    - name: Run the k3s install script
+      shell: sh /root/install_k3s.sh
+      environment:
+        K3S_URL: "{{ k3s_url }}"
+        K3S_TOKEN: "{{ k3s_token }}"
+      

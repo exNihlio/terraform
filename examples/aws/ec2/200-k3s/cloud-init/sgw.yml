@@ -1,0 +1,11 @@
+#cloud-config
+users:
+  - name: k3s_admin
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJnaMg0+xrxz6SrCAIHTU99el9tLi3JNq8RfFPWAkCLJ cbeamer@Adams-MacBook-Air.local
+package_update: true
+packages:
+  - ansible
+  - python3
