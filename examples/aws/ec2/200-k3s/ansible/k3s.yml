@@ -27,7 +27,7 @@
     - name: Get k3s token
       command: cat /var/lib/rancher/k3s/server/node-token
       register: k3s_token
-      delegate_to: k3s-1.k3s.dev
+      delegate_to: '{{ k3s_admin }}'
       run_once: True
 
     - name: Fetch the k3s script
