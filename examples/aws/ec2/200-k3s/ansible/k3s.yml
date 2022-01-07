@@ -67,3 +67,9 @@
       copy:
         src: /tmp/{{ k3s_main_hostname }}/etc/rancher/k3s/k3s.yaml
         dest: ~/.kube/config
+
+    - name: Correct default server in kubeconfig
+      lineinfile:
+        line: 'server: https://{{ k3s_main_hostname }}'
+        regex: '^server: https://127.0.0.1:6443'
+        path: ~/.kube/config
