@@ -40,3 +40,20 @@
       environment:
         K3S_URL: "{{ k3s_url }}"
         K3S_TOKEN: "{{ k3s_token.stdout }}"
+
+- hosts: localhost
+  become: False
+  tasks:
+    - name: Create '.kube' directory
+      file:
+        path: ~/.kube
+        state: directory
+        mode: 0700
+
+- hosts: k3s_main
+  become: True
+  tasks:
+    - name: kubeconfig from k3s main
+      fetch:
+        src: /etc/rancher/k3s/k3s.yml
+        dest: /tmp/kubeconfig
