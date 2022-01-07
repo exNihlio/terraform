@@ -55,5 +55,5 @@
   tasks:
     - name: kubeconfig from k3s main
       fetch:
-        src: /etc/rancher/k3s/k3s.yml
+        src: /etc/rancher/k3s/k3s.yaml
         dest: /tmp/kubeconfig
