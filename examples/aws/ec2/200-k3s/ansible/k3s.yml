@@ -27,7 +27,7 @@
     - name: Get k3s token
       command: cat /var/lib/rancher/k3s/server/node-token
       register: k3s_token
-      delegate_to: '{{ k3s_admin }}'
+      delegate_to: '{{ k3s_main_hostname }}'
       run_once: True
 
     - name: Fetch the k3s script
@@ -65,5 +65,5 @@
   tasks:
     - name: Copy kubeconfig
       copy:
-        src: /tmp/{{ k3s_main }}/etc/rancher/k3s/k3s.yaml
+        src: /tmp/{{ k3s_main_hostname }}/etc/rancher/k3s/k3s.yaml
         dest: ~/.kube/config
